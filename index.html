@@ -5,13 +5,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Proyecto de JavaScript</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <h1 class="text-3xl">Blackjack</h1>
-    <button id="btnGenerate" class="rounded-md bg-green-800 px-6 py-3 text-white">Generate Random Card</button>
-    <h2 id="number" class="w-1/12 rounded border-2 border-solid border-black py-6 text-center text-3xl font-bold"></h2>
+    <div class="flex gap-2">
+        <h1 class="text-3xl">Blackjack</h1>
+        <button id="btnGenerate" class="rounded-md bg-green-800 px-6 py-3 text-white">Give Player a Card</button>
+    </div>
+    <section class="flex flex-col h-screen w-full bg-gray-800 justify-center">
+        <div class="bg-orange-900 h-full">
+            <h3>Dealer Hand:</h3>
+            <div id="dealerShow"></div>
+        </div>
+        <div class="bg-green-900 h-full">
+            <h3 class="text-white font-bold">Player Hand:</h3>
+            <div id="playerShow"></div>
+        </div>
+    </section>
     <script src="script.js"></script>
 </body>
 
