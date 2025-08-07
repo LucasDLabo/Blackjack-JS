@@ -1,24 +1,37 @@
 const btnGenerate = document.getElementById('btnGenerate');
+const btnHit = document.getElementById('btnHit');
+const btnStand = document.getElementById('btnStand');
 
 let playerHand = [];
 let dealerHand = [];
 
+let deck = [];
 const suits = ['♠','♣','♦','♥'];
 const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
-let deck = [];
+
+
+btnHit.addEventListener('click', hit);
 
 createDeck();
 shuffleDeck();
 
 btnGenerate.addEventListener('click', generateCard);
 
+function hit() {
+    playerHand.push(giveCard());
+    updateScreen();
+
+    if (calculateHandValue(playerHand) > 21) {
+        console.warn("Went over 21. You Lose");
+    }
+}
+
 function generateCard() {
     if (deck.length === 0) {
         console.log("No cards left");
         return;
     }
-    const card = giveCard();
-    playerHand.push(card);
+    playerHand.push(giveCard());
     renderHand(playerHand, 'playerShow');
     
     console.log(`Hand Points: ${calculateHandValue(playerHand)}`);
@@ -32,7 +45,6 @@ function renderHand(hand, elementId) {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('card');
 
-        // Agregar color por palo
         if (card.suit === '♦' || card.suit === '♥') {
             cardDiv.classList.add('red');
         } else {
@@ -59,7 +71,7 @@ function calculateHandValue(hand) {
         }
     }
 
-    // Ajustar los As si el total supera 21
+    // Adjust value if score is bigger than 21
     while (value > 21 && aces > 0) {
         value -= 10;
         aces--;
@@ -87,4 +99,12 @@ function shuffleDeck() {
 
 function giveCard(){
     return deck.pop();
+}
+
+function updateScreen() {
+    renderHand(playerHand, 'playerShow');
+    // renderHand(dealerHand, 'dealerDisplay');
+
+    console.log(`Jugador: ${calculateHandValue(playerHand)}`);
+    // dealerScore.textContent = `Dealer: ${calculateHandValue(dealerHand)}`;
 }
