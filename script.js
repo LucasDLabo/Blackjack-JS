@@ -23,6 +23,7 @@ btnStand.addEventListener('click', stand);
 
 function startGame() {
     console.clear();
+    enableActions();
     dealerHand = [];
     createDeck();
     shuffleDeck();
@@ -44,6 +45,7 @@ function hit() {
 
     if (calculateHandValue(playerHand) > 21) {
         console.warn("Went over 21. You Lose");
+        disableActions();
     }
 }
 
@@ -156,6 +158,20 @@ function whoWin() {
     } else if (playerTotal < dealerTotal) {
         console.warn("¡Pierdes!");
     } else {
-        console.info("Empate!");
+        console.info("Push!");
     }
+    disableActions();
+}
+
+function disableActions() {
+    btnHit.disabled = true;
+    btnStand.disabled = true;
+    btnHit.classList.add('opacity-20');
+    btnStand.classList.add('opacity-20');
+}
+function enableActions() {
+    btnHit.disabled = false;
+    btnStand.disabled = false;
+    btnHit.classList.remove('opacity-20');
+    btnStand.classList.remove('opacity-20');
 }
