@@ -9,24 +9,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <div class="flex gap-2">
-        <h1 class="text-3xl">Blackjack</h1>
-        <button id="btnGenerate" class="rounded-md bg-green-800 px-6 py-3 text-white">Give Player a Card</button>
-        <button id="btnStand" class="bg-red-800">Stand</button>
-        <button id="btnHit" class="bg-blue-800">Hit</button>
-        
-    </div>
-    <section class="flex flex-col h-screen w-full bg-gray-800 justify-center">
-        <div class="bg-orange-900 h-full">
-            <h3>Dealer Hand:</h3>
-            <div id="dealerShow"></div>
+<body class="bg-gray-900">
+    <div class="flex h-32 flex-col gap-2">
+        <h1 class="text-5xl text-white font-extrabold">Blackjack</h1>
+        <div class="flex my-5 gap-2 items-center">
+            <button id="btnStart" class="rounded-md bg-green-800 px-6 py-3 text-white">Start Game</button>
+            <button id="btnStand" class="rounded-md bg-red-800 px-6 py-3 text-white">Stand</button>
+            <button id="btnHit" class="rounded-md bg-blue-800 px-6 py-3 text-white">Hit</button>
+            <button id="btnReset" class="rounded-md bg-gray-700 h-10 px-2 py-1 text-white">Reset</button>
         </div>
-        <div class="bg-green-900 h-full">
-            <h3 class="text-white font-bold">Player Hand:</h3>
+    </div>
+
+    <section id="gameBoard" class="h-[calc(100vh-128px)] w-full flex-col justify-center">
+        <div class="bg-orange-900/40 h-full">
+            <div class="h-full">
+                <div id="dealerShow" class="h-[70px]"></div>
+                <div class="relative top-1/2 mt-[calc(-1.875rem+-70px)] -z-10 ">
+                    <div class="flex select-none items-center justify-center text-center text-6xl font-bold uppercase">Dealer</div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-green-900/40 h-full">
             <div id="playerShow"></div>
+            <div class="relative top-1/2 mt-[calc(-1.875rem+-70px)] -z-10 ">
+                <div class="flex select-none items-center justify-center text-center text-6xl font-bold uppercase">You</div>
+            </div>
         </div>
     </section>
+
     <script src="script.js"></script>
 </body>
 

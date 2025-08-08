@@ -18,3 +18,7 @@
 .card.black {
     color: black;
 }
+
+#btnHit, #btnStand, #btnReset, #gameBoard {
+    display: none;
+}

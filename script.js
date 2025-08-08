@@ -1,6 +1,9 @@
-const btnGenerate = document.getElementById('btnGenerate');
+const gameBoard = document.getElementById('gameBoard');
+
+const btnStart = document.getElementById('btnStart');
 const btnHit = document.getElementById('btnHit');
 const btnStand = document.getElementById('btnStand');
+const btnReset = document.getElementById('btnReset');
 
 let playerHand = [];
 let dealerHand = [];
@@ -10,12 +13,27 @@ const suits = ['♠','♣','♦','♥'];
 const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
 
 
+btnStart.addEventListener('click', startGame);
 btnHit.addEventListener('click', hit);
 
-createDeck();
-shuffleDeck();
+function startGame() {
+    createDeck();
+    shuffleDeck();
+    playerHand = [giveCard(), giveCard()];
+    btnStart.style.display = 'none';
+    gameBoard.style.display = 'flex';
+    btnHit.style.display = 'inline-block';
+    btnStand.style.display = 'inline-block';
+    btnReset.style.display = 'inline-block';
 
-btnGenerate.addEventListener('click', generateCard);
+    // dealerHand = [giveCard()];
+
+    updateScreen();
+    // resultDisplay.textContent = '';
+}
+
+
+// btnGenerate.addEventListener('click', generateCard);
 
 function hit() {
     playerHand.push(giveCard());
