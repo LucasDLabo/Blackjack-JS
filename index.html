@@ -23,15 +23,17 @@
     <section id="gameBoard" class="h-[calc(100vh-128px)] w-full flex-col justify-center">
         <div class="bg-orange-900/40 h-full">
             <div class="h-full">
+                <div id="dealerScore" class="text-white font-medium text-base invisible"></div>
                 <div id="dealerShow" class="h-[70px]"></div>
-                <div class="relative top-1/2 mt-[calc(-1.875rem+-70px)] -z-10 ">
+                <div class="relative top-1/2 mt-[calc(-1.875rem+-70px+-1rem)] -z-10 ">
                     <div class="flex select-none items-center justify-center text-center text-6xl font-bold uppercase">Dealer</div>
                 </div>
             </div>
         </div>
         <div class="bg-green-900/40 h-full">
+            <div id="playerScore" class="text-white font-medium text-base"></div>
             <div id="playerShow"></div>
-            <div class="relative top-1/2 mt-[calc(-1.875rem+-70px)] -z-10 ">
+            <div class="relative top-1/2 mt-[calc(-1.875rem+-70px+-1rem)] -z-10 ">
                 <div class="flex select-none items-center justify-center text-center text-6xl font-bold uppercase">You</div>
             </div>
         </div>

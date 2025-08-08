@@ -5,6 +5,9 @@ const btnHit = document.getElementById('btnHit');
 const btnStand = document.getElementById('btnStand');
 const btnReset = document.getElementById('btnReset');
 
+const playerScore = document.getElementById('playerScore');
+const dealerScore = document.getElementById('dealerScore');
+
 let playerHand = [];
 let dealerHand = [];
 
@@ -14,26 +17,26 @@ const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
 
 
 btnStart.addEventListener('click', startGame);
+btnReset.addEventListener('click', startGame);
 btnHit.addEventListener('click', hit);
+btnStand.addEventListener('click', stand);
 
 function startGame() {
+    console.clear();
+    dealerHand = [];
     createDeck();
     shuffleDeck();
     playerHand = [giveCard(), giveCard()];
     btnStart.style.display = 'none';
+    dealerScore.classList.add('invisible');
     gameBoard.style.display = 'flex';
     btnHit.style.display = 'inline-block';
     btnStand.style.display = 'inline-block';
     btnReset.style.display = 'inline-block';
 
-    // dealerHand = [giveCard()];
-
     updateScreen();
-    // resultDisplay.textContent = '';
+
 }
-
-
-// btnGenerate.addEventListener('click', generateCard);
 
 function hit() {
     playerHand.push(giveCard());
@@ -42,6 +45,15 @@ function hit() {
     if (calculateHandValue(playerHand) > 21) {
         console.warn("Went over 21. You Lose");
     }
+}
+
+function stand() {
+    // Dealer plays...
+    while (calculateHandValue(dealerHand) < 17) {
+        dealerHand.push(giveCard());
+    }
+    dealerScore.classList.remove('invisible');
+    updateScreen();
 }
 
 function generateCard() {
@@ -121,8 +133,13 @@ function giveCard(){
 
 function updateScreen() {
     renderHand(playerHand, 'playerShow');
-    // renderHand(dealerHand, 'dealerDisplay');
+    renderHand(dealerHand, 'dealerShow');
 
+    playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
+    dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
+
+    console.group("Points");
     console.log(`Jugador: ${calculateHandValue(playerHand)}`);
-    // dealerScore.textContent = `Dealer: ${calculateHandValue(dealerHand)}`;
+    console.log(`Dealer: ${calculateHandValue(dealerHand)}`);
+    console.groupEnd();
 }
