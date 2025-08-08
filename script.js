@@ -54,6 +54,7 @@ function stand() {
     }
     dealerScore.classList.remove('invisible');
     updateScreen();
+    whoWin();
 }
 
 function generateCard() {
@@ -142,4 +143,19 @@ function updateScreen() {
     console.log(`Jugador: ${calculateHandValue(playerHand)}`);
     console.log(`Dealer: ${calculateHandValue(dealerHand)}`);
     console.groupEnd();
+}
+
+function whoWin() {
+    const playerTotal = calculateHandValue(playerHand);
+    const dealerTotal = calculateHandValue(dealerHand);
+
+    if (dealerTotal > 21) {
+        console.log("El dealer se pasó. ¡Ganas!");
+    } else if (playerTotal > dealerTotal) {
+        console.log("¡Le ganas al Dealer!");
+    } else if (playerTotal < dealerTotal) {
+        console.warn("¡Pierdes!");
+    } else {
+        console.info("Empate!");
+    }
 }
