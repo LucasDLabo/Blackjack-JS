@@ -84,7 +84,25 @@ function renderHand(hand, elementId) {
             cardDiv.classList.add('black');
         }
 
-        cardDiv.textContent = `${card.suit}${card.value}`;
+        // Top-left
+        const topLeft = document.createElement('div');
+        topLeft.classList.add('top-left');
+        topLeft.innerHTML = `${card.value}<br>${card.suit}`;
+
+        // Center
+        const center = document.createElement('div');
+        center.classList.add('center');
+        center.textContent = card.suit;
+
+        // Bottom-right
+        const bottomRight = document.createElement('div');
+        bottomRight.classList.add('bottom-right');
+        bottomRight.innerHTML = `${card.value}<br>${card.suit}`;
+
+        cardDiv.appendChild(topLeft);
+        cardDiv.appendChild(center);
+        cardDiv.appendChild(bottomRight);
+
         container.appendChild(cardDiv);
     }
 }
