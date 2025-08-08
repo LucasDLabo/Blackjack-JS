@@ -20,21 +20,24 @@
         </div>
     </div>
 
-    <section id="gameBoard" class="h-[calc(100vh-128px)] w-full flex-col justify-center">
-        <div class="bg-orange-900/40 h-full">
-            <div class="h-full">
-                <div id="dealerScore" class="text-white font-medium text-base invisible"></div>
-                <div id="dealerShow" class="h-[70px]"></div>
-                <div class="relative top-1/2 mt-[calc(-1.875rem+-70px+-1rem)] -z-10 ">
-                    <div class="flex select-none items-center justify-center text-center text-6xl font-bold uppercase">Dealer</div>
-                </div>
+    <section id="gameBoard" class="flex h-[calc(100vh-128px)] w-full flex-col justify-center">
+        <div class="relative h-full bg-orange-900/40">
+            <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-[10rem] font-bold uppercase tracking-widest">
+                Dealer
+            </div>
+
+            <div class="flex h-full flex-col items-center justify-center">
+                <div id="dealerScore" class="invisible h-6 text-base font-medium text-white"></div>
+                <div id="dealerShow" class="mb-6 h-[140px]"></div>
             </div>
         </div>
-        <div class="bg-green-900/40 h-full">
-            <div id="playerScore" class="text-white font-medium text-base"></div>
-            <div id="playerShow" class="h-[70px]"></div>
-            <div class="relative top-1/2 mt-[calc(-1.875rem+-70px+-1rem)] -z-10 ">
-                <div class="flex select-none items-center justify-center text-center text-6xl font-bold uppercase">You</div>
+        <div class="relative h-full bg-green-900/40">
+            <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-[10rem] font-bold uppercase tracking-widest">
+                You
+            </div>
+            <div class="flex h-full flex-col items-center justify-center">
+                <div id="playerScore" class="text-base font-medium text-white"></div>
+                <div id="playerShow" class="mb-6 h-[140px]"></div>
             </div>
         </div>
     </section>

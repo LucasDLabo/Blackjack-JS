@@ -44,6 +44,6 @@
     pointer-events: none;
     user-select: none;
 }
-#btnHit, #btnStand, #btnReset, #gameBoard {
+#btnHit, #btnStand, #btnReset {
     display: none;
 }

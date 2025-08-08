@@ -30,7 +30,7 @@ function startGame() {
     playerHand = [giveCard(), giveCard()];
     btnStart.style.display = 'none';
     dealerScore.classList.add('invisible');
-    gameBoard.style.display = 'flex';
+    // gameBoard.style.display = 'flex';
     btnHit.style.display = 'inline-block';
     btnStand.style.display = 'inline-block';
     btnReset.style.display = 'inline-block';
