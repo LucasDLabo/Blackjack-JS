@@ -10,15 +10,27 @@
 </head>
 
 <body class="bg-gray-900">
-    <div class="flex h-32 flex-col gap-2">
-        <h1 class="text-5xl text-white font-extrabold">Blackjack</h1>
-        <div class="flex my-5 gap-2 items-center">
-            <button id="btnStart" class="rounded-md bg-green-800 px-6 py-3 text-white">Start Game</button>
-            <button id="btnStand" class="rounded-md bg-red-800 px-6 py-3 text-white">Stand</button>
-            <button id="btnHit" class="rounded-md bg-blue-800 px-6 py-3 text-white">Hit</button>
-            <button id="btnReset" class="rounded-md bg-gray-700 h-10 px-2 py-1 text-white">Reset</button>
+
+    <section class="flex items-center">
+        <div class="flex h-32 flex-col gap-2">
+            <h1 class="text-5xl text-white font-extrabold">Blackjack</h1>
+            <div class="flex my-5 gap-2 items-center">
+                <button id="btnStart" class="rounded-md bg-green-800 px-6 py-3 text-white">Start Game</button>
+                <button id="btnStand" class="rounded-md bg-red-800 px-6 py-3 text-white">Stand</button>
+                <button id="btnHit" class="rounded-md bg-blue-800 px-6 py-3 text-white">Hit</button>
+                <button id="btnReset" class="rounded-md bg-gray-700 h-10 px-2 py-1 text-white">Reset</button>
+            </div>
         </div>
-    </div>
+
+        <div id="betArea" class="text-white flex w-full flex-col ml-10">
+            <div>
+                <p>Saldo: $<span id="balance">1000</span></p>
+                <label for="betInput">Apuesta:</label>
+                <input class="text-black" type="number" id="betInput" value="100" min="1" />
+                <button class="bg-green-900" id="placeBet">Apostar</button>
+            </div>
+        </div>
+    </section>
 
     <section id="gameBoard" class="flex h-[calc(100vh-128px)] w-full flex-col justify-center">
         <div class="relative h-full bg-orange-900/40">

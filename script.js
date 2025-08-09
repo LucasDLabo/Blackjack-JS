@@ -15,6 +15,12 @@ let deck = [];
 const suits = ['♠','♣','♦','♥'];
 const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
 
+let balance = 1000;
+let currentBet = 0;
+const balanceDisplay = document.getElementById('balance');
+const betInput = document.getElementById('betInput');
+const placeBetBtn = document.getElementById('placeBet');
+
 
 btnStart.addEventListener('click', startGame);
 btnReset.addEventListener('click', startGame);
@@ -171,12 +177,18 @@ function whoWin() {
 
     if (dealerTotal > 21) {
         console.log("El dealer se pasó. ¡Ganas!");
+        balance += currentBet * 2;
+        updateBalance();
     } else if (playerTotal > dealerTotal) {
         console.log("¡Le ganas al Dealer!");
+        balance += currentBet * 2;
+        updateBalance();
     } else if (playerTotal < dealerTotal) {
         console.warn("¡Pierdes!");
     } else {
         console.info("Push!");
+        balance += currentBet;
+        updateBalance();
     }
     disableActions();
 }
@@ -192,4 +204,27 @@ function enableActions() {
     btnStand.disabled = false;
     btnHit.classList.remove('opacity-20');
     btnStand.classList.remove('opacity-20');
+}
+
+placeBetBtn.addEventListener('click', () => {
+    const bet = parseInt(betInput.value);
+
+    if (isNaN(bet) || bet <= 0) {
+        alert("Apuesta inválida");
+        return;
+    }
+
+    if (bet > balance) {
+        alert("No tienes suficiente saldo");
+        return;
+    }
+
+    currentBet = bet;
+    balance -= bet;
+    updateBalance();
+    startGame(); // inicia el juego con la apuesta realizada
+});
+
+function updateBalance() {
+    balanceDisplay.textContent = balance;
 }
