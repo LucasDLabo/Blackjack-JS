@@ -1,12 +1,18 @@
 const gameBoard = document.getElementById('gameBoard');
 
 const btnStart = document.getElementById('btnStart');
+
+const handButtons = document.getElementById('handButtons');
+const chipButtons = document.querySelectorAll('.chip');
+
 const btnHit = document.getElementById('btnHit');
 const btnStand = document.getElementById('btnStand');
 const btnReset = document.getElementById('btnReset');
 
 const playerScore = document.getElementById('playerScore');
 const dealerScore = document.getElementById('dealerScore');
+
+const betArea = document.getElementById('betArea');
 
 let playerHand = [];
 let dealerHand = [];
@@ -17,6 +23,8 @@ const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
 
 let balance = 1000;
 let currentBet = 0;
+const totalBet = document.getElementById('totalBet');
+
 const balanceDisplay = document.getElementById('balance');
 const betInput = document.getElementById('betInput');
 const placeBetBtn = document.getElementById('placeBet');
@@ -27,22 +35,38 @@ btnReset.addEventListener('click', startGame);
 btnHit.addEventListener('click', hit);
 btnStand.addEventListener('click', stand);
 
+const btnClear = document.getElementById('btnClear');
+btnClear.addEventListener('click', clearBet);
+
 function startGame() {
     console.clear();
     enableActions();
+    
+    btnStart.style.display = 'none';
+    dealerScore.classList.add('invisible');
+    betArea.classList.remove('invisible');
+    updateBalance();
+}
+
+const btnBet = document.getElementById('btnBet');
+
+btnBet.addEventListener('click', startHand);
+function startHand(){
+    const chipSection = document.getElementById('chips');
+    chipSection.classList.add('invisible');
+    btnBet.classList.add('invisible');
+    btnClear.classList.add('invisible');
+
+    const bet = parseInt(totalBet.textContent);
+    currentBet = bet;
+    updateBalance();
     dealerHand = [];
     createDeck();
     shuffleDeck();
     playerHand = [giveCard(), giveCard()];
-    btnStart.style.display = 'none';
-    dealerScore.classList.add('invisible');
-    // gameBoard.style.display = 'flex';
-    btnHit.style.display = 'inline-block';
-    btnStand.style.display = 'inline-block';
-    btnReset.style.display = 'inline-block';
-
-    updateScreen();
-
+    dealerHand = [giveCard()];
+    handButtons.classList.remove('invisible');
+    updateScreen(); 
 }
 
 function hit() {
@@ -206,25 +230,46 @@ function enableActions() {
     btnStand.classList.remove('opacity-20');
 }
 
-placeBetBtn.addEventListener('click', () => {
-    const bet = parseInt(betInput.value);
+// placeBetBtn.addEventListener('click', () => {
+//     const bet = parseInt(betInput.value);
 
-    if (isNaN(bet) || bet <= 0) {
-        alert("Apuesta inválida");
-        return;
-    }
+//     if (isNaN(bet) || bet <= 0) {
+//         alert("Apuesta inválida");
+//         return;
+//     }
 
-    if (bet > balance) {
+//     if (bet > balance) {
+//         alert("No tienes suficiente saldo");
+//         return;
+//     }
+
+//     currentBet = bet;
+//     balance -= bet;
+//     updateBalance();
+//     startHand();
+// });
+
+chipButtons.forEach(chip => {
+    chip.addEventListener('click', () => {
+        const value = parseInt(chip.dataset.value);
+        if (balance >= value) {
+        currentBet += value;
+        balance -= value;
+
+        updateBalance();
+        } else {
         alert("No tienes suficiente saldo");
-        return;
-    }
-
-    currentBet = bet;
-    balance -= bet;
-    updateBalance();
-    startGame(); // inicia el juego con la apuesta realizada
-});
+        }
+    });
+    });
 
 function updateBalance() {
     balanceDisplay.textContent = balance;
+    totalBet.textContent = currentBet;
+}
+
+function clearBet() {
+    currentBet = 0;
+    balance = 1000;
+    updateBalance();
 }

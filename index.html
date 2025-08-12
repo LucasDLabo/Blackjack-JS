@@ -14,20 +14,37 @@
     <section class="flex items-center">
         <div class="flex h-32 flex-col gap-2">
             <h1 class="text-5xl text-white font-extrabold">Blackjack</h1>
-            <div class="flex my-5 gap-2 items-center">
-                <button id="btnStart" class="rounded-md bg-green-800 px-6 py-3 text-white">Start Game</button>
+            <button id="btnStart" class="rounded-md bg-green-800 px-6 py-3 text-white">Start Game</button>
+            <div class="flex my-5 gap-2 items-center invisible" id="handButtons"  >
                 <button id="btnStand" class="rounded-md bg-red-800 px-6 py-3 text-white">Stand</button>
                 <button id="btnHit" class="rounded-md bg-blue-800 px-6 py-3 text-white">Hit</button>
                 <button id="btnReset" class="rounded-md bg-gray-700 h-10 px-2 py-1 text-white">Reset</button>
             </div>
         </div>
 
-        <div id="betArea" class="text-white flex w-full flex-col ml-10">
-            <div>
-                <p>Saldo: $<span id="balance">1000</span></p>
-                <label for="betInput">Apuesta:</label>
-                <input class="text-black" type="number" id="betInput" value="100" min="1" />
-                <button class="bg-green-900" id="placeBet">Apostar</button>
+        <div id="betArea" class="text-white flex w-full flex-col justify-center pl-10 invisible bg-green-950/30">
+            <h2>Place your bet</h2>
+            <div class="bg-blue-900/30 flex flex-row h-full items-center gap-10">
+                
+                <div id="chips">
+                    <button data-value="1" class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-gray-500 font-bold transition-transform active:scale-90">$1</button>
+                    <button data-value="5"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-red-800 font-bold transition-transform active:scale-90">$5</button>
+                    <button data-value="25"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-green-800 font-bold transition-transform active:scale-90">$25</button>
+                    <button data-value="50"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-blue-900 font-bold transition-transform active:scale-90">$50</button>
+                    <button data-value="100"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-gray-800 font-bold transition-transform active:scale-90">$100</button>
+                    <button data-value="500"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-purple-900 font-bold transition-transform active:scale-90">$500</button>
+                </div>
+                <div id="currentBet" class="flex flex-col">
+                    <p>Money: $<span id="balance">1000</span></p>
+                    <span>Current Bet</span>
+                    <span class="bg-black text-center">
+                        <span>$<span id="totalBet"></span></span>
+                    </span>
+                    <button id="btnClear" class="bg-gray-700 rounded-md">Clear</button>
+                </div>
+                <div class="flex items-center">
+                    <button id="btnBet" class="bg-green-800 rounded-md w-16 h-10">Deal!</button>
+                </div>
             </div>
         </div>
     </section>
@@ -55,6 +72,52 @@
     </section>
 
     <script src="script.js"></script>
+
+    <div class="bg-green-800 text-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
+  <!-- Title -->
+  <h2 class="text-xl font-bold text-center mb-4">Place Your Bet</h2>
+
+  <!-- Bet amount display -->
+  <div class="flex items-center justify-center mb-4">
+    <span class="text-lg mr-2">Bet:</span>
+    <span class="bg-black px-4 py-2 rounded text-yellow-400 font-mono text-lg">
+      $<span id="bet-amount">0</span>
+    </span>
+  </div>
+
+  <!-- Chips selection -->
+  <div class="flex justify-center space-x-4 mb-4">
+    <button class="w-14 h-14 rounded-full bg-red-600 border-4 border-yellow-400 shadow-md hover:scale-110 transition"
+            onclick="addBet(5)">
+      $5
+    </button>
+    <button class="w-14 h-14 rounded-full bg-blue-600 border-4 border-yellow-400 shadow-md hover:scale-110 transition"
+            onclick="addBet(25)">
+      $25
+    </button>
+    <button class="w-14 h-14 rounded-full bg-yellow-500 border-4 border-black shadow-md hover:scale-110 transition"
+            onclick="addBet(50)">
+      $50
+    </button>
+    <button class="w-14 h-14 rounded-full bg-purple-700 border-4 border-yellow-400 shadow-md hover:scale-110 transition"
+            onclick="addBet(100)">
+      $100
+    </button>
+  </div>
+
+  <!-- Controls -->
+  <div class="flex justify-center space-x-4">
+    <button class="bg-gray-500 px-4 py-2 rounded-lg hover:bg-gray-600 transition"
+            onclick="clearBet()">
+      Clear
+    </button>
+    <button class="bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold hover:bg-yellow-400 transition"
+            onclick="placeBet()">
+      Deal
+    </button>
+  </div>
+</div>
+
 </body>
 
 </html>
