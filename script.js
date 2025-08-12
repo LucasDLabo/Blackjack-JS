@@ -1,13 +1,10 @@
 const gameBoard = document.getElementById('gameBoard');
 
-const btnStart = document.getElementById('btnStart');
-
 const handButtons = document.getElementById('handButtons');
-const chipButtons = document.querySelectorAll('.chip');
+
 
 const btnHit = document.getElementById('btnHit');
 const btnStand = document.getElementById('btnStand');
-const btnReset = document.getElementById('btnReset');
 
 const playerScore = document.getElementById('playerScore');
 const dealerScore = document.getElementById('dealerScore');
@@ -29,33 +26,73 @@ const balanceDisplay = document.getElementById('balance');
 const betInput = document.getElementById('betInput');
 const placeBetBtn = document.getElementById('placeBet');
 
-
+const btnStart = document.getElementById('btnStart');
 btnStart.addEventListener('click', startGame);
-btnReset.addEventListener('click', startGame);
-btnHit.addEventListener('click', hit);
-btnStand.addEventListener('click', stand);
-
-const btnClear = document.getElementById('btnClear');
-btnClear.addEventListener('click', clearBet);
 
 function startGame() {
     console.clear();
+    renderHand([], 'playerShow');
+    renderHand([], 'dealerShow');
+    currentBet = 0;
     enableActions();
     
     btnStart.style.display = 'none';
     dealerScore.classList.add('invisible');
+    playerScore.classList.add('invisible');
+    btnNextHand.classList.add('invisible');
+
     betArea.classList.remove('invisible');
+    chipSection.classList.remove('invisible');
+    btnBet.classList.remove('invisible');
+    updateBalance();
+}
+
+const chipButtons = document.querySelectorAll('.chip');
+chipButtons.forEach(chip => {
+    chip.addEventListener('click', () => {
+            const value = parseInt(chip.dataset.value);
+            if (balance >= value) {
+            currentBet += value;
+            balance -= value;
+            updateBalance();
+        } else {
+            alert("No tienes suficiente saldo");
+        }
+    });
+});
+
+function updateBalance() {
+    balanceDisplay.textContent = balance;
+    totalBet.textContent = currentBet;
+}
+
+const btnClear = document.getElementById('btnClear');
+btnClear.addEventListener('click', clearBet);
+function clearBet() {
+    balance += currentBet;
+    currentBet = 0;
     updateBalance();
 }
 
 const btnBet = document.getElementById('btnBet');
-
+const chipSection = document.getElementById('chips');
 btnBet.addEventListener('click', startHand);
 function startHand(){
-    const chipSection = document.getElementById('chips');
+
+    if (currentBet == 0) {
+        alert("Introduzca una apuesta");
+        return;
+    }
+    
     chipSection.classList.add('invisible');
     btnBet.classList.add('invisible');
     btnClear.classList.add('invisible');
+    
+    handButtons.classList.remove('invisible');
+    playerScore.classList.remove('invisible');
+    dealerScore.classList.remove('invisible');
+    btnHit.classList.remove('invisible');
+    btnStand.classList.remove('invisible');
 
     const bet = parseInt(totalBet.textContent);
     currentBet = bet;
@@ -65,10 +102,11 @@ function startHand(){
     shuffleDeck();
     playerHand = [giveCard(), giveCard()];
     dealerHand = [giveCard()];
-    handButtons.classList.remove('invisible');
+    
     updateScreen(); 
 }
 
+btnHit.addEventListener('click', hit);
 function hit() {
     playerHand.push(giveCard());
     updateScreen();
@@ -79,6 +117,7 @@ function hit() {
     }
 }
 
+btnStand.addEventListener('click', stand);
 function stand() {
     // Dealer plays...
     while (calculateHandValue(dealerHand) < 17) {
@@ -189,10 +228,6 @@ function updateScreen() {
     playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
     dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
 
-    console.group("Points");
-    console.log(`Jugador: ${calculateHandValue(playerHand)}`);
-    console.log(`Dealer: ${calculateHandValue(dealerHand)}`);
-    console.groupEnd();
 }
 
 function whoWin() {
@@ -203,73 +238,41 @@ function whoWin() {
         console.log("El dealer se pasó. ¡Ganas!");
         balance += currentBet * 2;
         updateBalance();
+        alert("El dealer se pasó. ¡Ganas!");
+        // Start Another Hand
     } else if (playerTotal > dealerTotal) {
         console.log("¡Le ganas al Dealer!");
         balance += currentBet * 2;
         updateBalance();
+        alert("¡Le ganas al Dealer!");
+        // Start Another Hand
     } else if (playerTotal < dealerTotal) {
         console.warn("¡Pierdes!");
+        alert("¡Pierdes!");
+        // Start Another Hand
     } else {
         console.info("Push!");
         balance += currentBet;
         updateBalance();
+        alert('Push!');
+        // Start Another Hand
     }
     disableActions();
 }
 
+const btnNextHand = document.getElementById('btnNextHand');
 function disableActions() {
     btnHit.disabled = true;
     btnStand.disabled = true;
-    btnHit.classList.add('opacity-20');
-    btnStand.classList.add('opacity-20');
+    btnHit.classList.add('invisible');
+    btnStand.classList.add('invisible');
+    btnNextHand.classList.remove('invisible');
 }
+
+btnNextHand.addEventListener('click', startGame);
 function enableActions() {
     btnHit.disabled = false;
     btnStand.disabled = false;
     btnHit.classList.remove('opacity-20');
     btnStand.classList.remove('opacity-20');
-}
-
-// placeBetBtn.addEventListener('click', () => {
-//     const bet = parseInt(betInput.value);
-
-//     if (isNaN(bet) || bet <= 0) {
-//         alert("Apuesta inválida");
-//         return;
-//     }
-
-//     if (bet > balance) {
-//         alert("No tienes suficiente saldo");
-//         return;
-//     }
-
-//     currentBet = bet;
-//     balance -= bet;
-//     updateBalance();
-//     startHand();
-// });
-
-chipButtons.forEach(chip => {
-    chip.addEventListener('click', () => {
-        const value = parseInt(chip.dataset.value);
-        if (balance >= value) {
-        currentBet += value;
-        balance -= value;
-
-        updateBalance();
-        } else {
-        alert("No tienes suficiente saldo");
-        }
-    });
-    });
-
-function updateBalance() {
-    balanceDisplay.textContent = balance;
-    totalBet.textContent = currentBet;
-}
-
-function clearBet() {
-    currentBet = 0;
-    balance = 1000;
-    updateBalance();
 }
