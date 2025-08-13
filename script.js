@@ -44,6 +44,7 @@ function startGame() {
     betArea.classList.remove('invisible');
     chipSection.classList.remove('invisible');
     btnBet.classList.remove('invisible');
+    btnClear.classList.remove('invisible');
     updateBalance();
 }
 
@@ -114,6 +115,7 @@ function hit() {
     if (calculateHandValue(playerHand) > 21) {
         console.warn("Went over 21. You Lose");
         disableActions();
+        showResult('lose', currentBet);
     }
 }
 
@@ -238,27 +240,62 @@ function whoWin() {
         console.log("El dealer se pasó. ¡Ganas!");
         balance += currentBet * 2;
         updateBalance();
-        alert("El dealer se pasó. ¡Ganas!");
+        showResult('win', currentBet * 2);   // ganó $50
         // Start Another Hand
     } else if (playerTotal > dealerTotal) {
         console.log("¡Le ganas al Dealer!");
         balance += currentBet * 2;
         updateBalance();
-        alert("¡Le ganas al Dealer!");
+        showResult('win', currentBet * 2);   // ganó $50
         // Start Another Hand
     } else if (playerTotal < dealerTotal) {
         console.warn("¡Pierdes!");
-        alert("¡Pierdes!");
+        showResult('lose', currentBet);  // perdió $25
         // Start Another Hand
     } else {
         console.info("Push!");
         balance += currentBet;
         updateBalance();
-        alert('Push!');
+        showResult('tie', 0);    // empate
         // Start Another Hand
     }
     disableActions();
 }
+
+const resultModal = document.getElementById('resultModal');
+const resultTitle = document.getElementById('resultTitle');
+const resultMessage = document.getElementById('resultMessage');
+const resultAmount = document.getElementById('resultAmount');
+const closeResult = document.getElementById('closeResult');
+
+function showResult(result, amount) {
+    resultModal.classList.remove('invisible');
+    resultModal.querySelector('div').classList.add('show-modal');
+
+    if (result === 'win') {
+        resultTitle.textContent = 'You Won!';
+        resultMessage.textContent = 'Congratulations!';
+        resultAmount.textContent = `+$${amount}`;
+        resultAmount.className = 'text-green-500 text-xl font-bold';
+    } 
+    else if (result === 'lose') {
+        resultTitle.textContent = 'You Lost!';
+        resultMessage.textContent = 'Better luck next time.';
+        resultAmount.textContent = `-$${amount}`;
+        resultAmount.className = 'text-red-500 text-xl font-bold';
+    } 
+    else {
+        resultTitle.textContent = 'It\'s a Tie!';
+        resultMessage.textContent = 'No one wins this round.';
+        resultAmount.textContent = `$0`;
+        resultAmount.className = 'text-gray-500 text-xl font-bold';
+    }
+}
+
+closeResult.addEventListener('click', () => {
+    resultModal.classList.add('invisible');
+});
+
 
 const btnNextHand = document.getElementById('btnNextHand');
 function disableActions() {

@@ -26,7 +26,7 @@
             <h2>Place your bet</h2>
             <div class="bg-blue-900/30 flex flex-row h-full items-center gap-10">
                 
-                <div id="chips">
+                <div id="chips" class="bg-purple-500/50">
                     <button data-value="1" class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-gray-500 font-bold transition-transform active:scale-90">$1</button>
                     <button data-value="5"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-red-800 font-bold transition-transform active:scale-90">$5</button>
                     <button data-value="25"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-green-800 font-bold transition-transform active:scale-90">$25</button>
@@ -34,15 +34,15 @@
                     <button data-value="100"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-gray-800 font-bold transition-transform active:scale-90">$100</button>
                     <button data-value="500"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-purple-900 font-bold transition-transform active:scale-90">$500</button>
                 </div>
-                <div id="currentBet" class="flex flex-col">
+                <div id="currentBet" class="flex flex-col bg-orange-500/50 items-center">
                     <p>Money: $<span id="balance">1000</span></p>
                     <span>Current Bet</span>
-                    <span class="bg-black text-center">
+                    <span class="bg-black text-center w-full">
                         <span>$<span id="totalBet"></span></span>
                     </span>
-                    <button id="btnClear" class="bg-gray-700 rounded-md">Clear</button>
+                    <button id="btnClear" class="bg-gray-700 rounded-md w-20">Clear</button>
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center bg-cyan-700/50">
                     <button id="btnBet" class="bg-green-800 rounded-md w-16 h-10">Deal!</button>
                 </div>
             </div>
@@ -71,8 +71,18 @@
         </div>
     </section>
 
+        <!-- Resultado Modal -->
+    <div id="resultModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 invisible">
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm text-center transform scale-95 transition-all duration-300">
+            <h2 id="resultTitle" class="text-2xl font-bold mb-4">Resultado</h2>
+            <p id="resultMessage" class="text-lg mb-2">Has ganado</p>
+            <p id="resultAmount" class="text-xl font-bold"></p>
+            <button id="closeResult" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                Close
+            </button>
+        </div>
+    </div>
     <script src="script.js"></script>
-
 </body>
 
 </html>
