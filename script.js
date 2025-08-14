@@ -108,14 +108,16 @@ function startHand(){
 }
 
 btnHit.addEventListener('click', hit);
+
 function hit() {
     playerHand.push(giveCard());
     updateScreen();
 
     if (calculateHandValue(playerHand) > 21) {
-        console.warn("Went over 21. You Lose");
+        setTimeout( () => {
+            showResult('lose', currentBet, "You went over 21!");
+        }, 1000);
         disableActions();
-        showResult('lose', currentBet);
     }
 }
 
@@ -240,24 +242,29 @@ function whoWin() {
         console.log("El dealer se pasó. ¡Ganas!");
         balance += currentBet * 2;
         updateBalance();
-        showResult('win', currentBet * 2);   // ganó $50
-        // Start Another Hand
+        setTimeout( () => {
+            showResult('win', currentBet * 2, "Dealer busts!");
+        }, 1000);
     } else if (playerTotal > dealerTotal) {
         console.log("¡Le ganas al Dealer!");
         balance += currentBet * 2;
         updateBalance();
-        showResult('win', currentBet * 2);   // ganó $50
-        // Start Another Hand
+        setTimeout( () => {
+            showResult('win', currentBet * 2, "You beat the Dealer!");
+        }, 1000);
     } else if (playerTotal < dealerTotal) {
         console.warn("¡Pierdes!");
-        showResult('lose', currentBet);  // perdió $25
-        // Start Another Hand
+        setTimeout( () => {
+            showResult('lose', currentBet, "Dealer wins this hand!");
+        }, 1000);
     } else {
         console.info("Push!");
         balance += currentBet;
         updateBalance();
-        showResult('tie', 0);    // empate
-        // Start Another Hand
+        setTimeout( () => {
+            showResult('tie', 0, "Push!");
+        }, 1000);
+        
     }
     disableActions();
 }
@@ -268,27 +275,30 @@ const resultMessage = document.getElementById('resultMessage');
 const resultAmount = document.getElementById('resultAmount');
 const closeResult = document.getElementById('closeResult');
 
-function showResult(result, amount) {
+function showResult(result, amount, comment) {
     resultModal.classList.remove('invisible');
     resultModal.querySelector('div').classList.add('show-modal');
 
     if (result === 'win') {
         resultTitle.textContent = 'You Won!';
-        resultMessage.textContent = 'Congratulations!';
+        resultTitle.classList.add('text-green-700');
+        resultMessage.textContent = comment;
         resultAmount.textContent = `+$${amount}`;
-        resultAmount.className = 'text-green-500 text-xl font-bold';
+        resultAmount.classList.add('text-green-700');
     } 
     else if (result === 'lose') {
         resultTitle.textContent = 'You Lost!';
-        resultMessage.textContent = 'Better luck next time.';
+        resultTitle.classList.add('text-red-700');
+        resultMessage.textContent = comment;
         resultAmount.textContent = `-$${amount}`;
-        resultAmount.className = 'text-red-500 text-xl font-bold';
+        resultAmount.classList.add('text-red-700');
     } 
     else {
         resultTitle.textContent = 'It\'s a Tie!';
-        resultMessage.textContent = 'No one wins this round.';
+        resultTitle.classList.add('text-gray-700');
+        resultMessage.textContent = comment;
         resultAmount.textContent = `$0`;
-        resultAmount.className = 'text-gray-500 text-xl font-bold';
+        resultAmount.classList.add('text-gray-500');
     }
 }
 
@@ -303,7 +313,10 @@ function disableActions() {
     btnStand.disabled = true;
     btnHit.classList.add('invisible');
     btnStand.classList.add('invisible');
-    btnNextHand.classList.remove('invisible');
+    setTimeout(() => {
+        btnNextHand.classList.remove('invisible');
+    }, 1000);
+    
 }
 
 btnNextHand.addEventListener('click', startGame);
