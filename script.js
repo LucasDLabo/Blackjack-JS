@@ -277,28 +277,30 @@ const closeResult = document.getElementById('closeResult');
 
 function showResult(result, amount, comment) {
     resultModal.classList.remove('invisible');
-    resultModal.querySelector('div').classList.add('show-modal');
+    // resultModal.querySelector('div').classList.add('show-modal');
+    resultTitle.className = '';
+    resultAmount.className = '';
 
     if (result === 'win') {
         resultTitle.textContent = 'You Won!';
-        resultTitle.classList.add('text-green-700');
+        resultTitle.className = 'text-2xl font-bold mb-4 text-green-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `+$${amount}`;
-        resultAmount.classList.add('text-green-700');
+        resultAmount.className = 'text-xl font-bold text-green-700';
     } 
     else if (result === 'lose') {
         resultTitle.textContent = 'You Lost!';
-        resultTitle.classList.add('text-red-700');
+        resultTitle.className = 'text-2xl font-bold mb-4 text-red-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `-$${amount}`;
-        resultAmount.classList.add('text-red-700');
+        resultAmount.className = 'text-xl font-bold text-red-700';
     } 
     else {
         resultTitle.textContent = 'It\'s a Tie!';
-        resultTitle.classList.add('text-gray-700');
+        resultTitle.className = 'text-2xl font-bold mb-4 text-gray-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `$0`;
-        resultAmount.classList.add('text-gray-500');
+        resultAmount.className = 'text-xl font-bold text-gray-500';
     }
 }
 
