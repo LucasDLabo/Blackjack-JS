@@ -105,6 +105,15 @@ function startHand(){
     dealerHand = [giveCard()];
     
     updateScreen(); 
+
+    if (calculateHandValue(playerHand) === 21 && playerHand.length === 2) {
+        btnHit.classList.add('invisible');
+        btnStand.classList.add('invisible');
+        setTimeout(() => {
+            stand();
+        }, 1000);
+        
+    }
 }
 
 btnHit.addEventListener('click', hit);
@@ -238,6 +247,23 @@ function whoWin() {
     const playerTotal = calculateHandValue(playerHand);
     const dealerTotal = calculateHandValue(dealerHand);
 
+    if (playerTotal == 21 && playerHand.length == 2  && !(dealerTotal === 21 && dealerHand.length === 2)) {
+        console.log('NATURAL BLACKJACK');
+        balance += currentBet * 2.5;
+        updateBalance();
+        showResult('win', currentBet * 2.5, "Blackjack!");
+        disableActions();
+        return;
+    }
+    if (dealerTotal == 21 && dealerHand.length == 2 && !(playerTotal === 21 && playerHand.length === 2)){
+        console.warn('NATURAL BLACKJACK. Dealer Wins');
+        setTimeout(() => {
+            showResult('lose', currentBet, "Dealer has Natural Blackjack!");
+        }, 1000);
+        disableActions();
+        return;
+    }
+
     if (dealerTotal > 21) {
         console.log("El dealer se pasó. ¡Ganas!");
         balance += currentBet * 2;
@@ -277,7 +303,7 @@ const closeResult = document.getElementById('closeResult');
 
 function showResult(result, amount, comment) {
     resultModal.classList.remove('invisible');
-    // resultModal.querySelector('div').classList.add('show-modal');
+
     resultTitle.className = '';
     resultAmount.className = '';
 
