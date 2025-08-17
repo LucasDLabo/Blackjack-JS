@@ -21,13 +21,21 @@ let deck = [];
 const suits = ['♠','♣','♦','♥'];
 const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
 
-let balance = 1000;
+let balance = 0;
 let currentBet = 0;
 const totalBet = document.getElementById('totalBet');
 
 const balanceDisplay = document.getElementById('balance');
 const betInput = document.getElementById('betInput');
 const placeBetBtn = document.getElementById('placeBet');
+
+const savedBalance = localStorage.getItem('balance');
+
+if (savedBalance !== null) {
+    balance = parseInt(savedBalance);
+} else {
+    balance = 1000;        // saldo inicial por defecto
+}
 
 const btnStart = document.getElementById('btnStart');
 btnStart.addEventListener('click', startGame);
@@ -72,6 +80,8 @@ function updateBalance() {
     currentBetString = currentBet
     balanceDisplay.textContent = balanceString.toLocaleString();
     totalBet.textContent = currentBetString.toLocaleString();
+
+    localStorage.setItem('balance', balance);
 }
 btnResetMoney.addEventListener('click', resetMoney);
 function resetMoney() {
@@ -446,6 +456,7 @@ function disableActions() {
         controls.classList.remove('justify-between');
         controls.classList.add('justify-center');
         btnNextHand.classList.remove('hidden');
+        btnNextHand.classList.add('flex');
     }, 1000);
     
 }
