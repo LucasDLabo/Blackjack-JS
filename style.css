@@ -10,6 +10,7 @@
     line-height: 70px;
     background-color: white;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    
 }
 .card.red {
     color: red;
@@ -43,4 +44,44 @@
     font-size: 50px;
     pointer-events: none;
     user-select: none;
+}
+.chip{
+    aspect-ratio: 1/1;
+    width: 4rem;
+    border-radius: 9999px;
+    border-width: 4px;
+    border-style: dotted;
+    font-weight: 700;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 50ms;
+}
+#handButtons button[disabled]{
+    opacity: 0.2;
+    user-select: none;
+}
+#handButtons button[disabled]:active{
+    transform: none;
+}
+
+@media (min-width: 1536px) {
+    .card{
+        width: 140px;
+        height: 200px;
+        line-height: 110px;
+        font-size: 25px;
+    }
+    .card .top-left{
+        left: -55px;
+        font-size: 25px;
+    }
+    .card .center{
+        font-size: 90px;
+    }
+    .card .bottom-right{
+        position: relative;
+        right: -55px;
+        font-size: 25px;
+        bottom: 0px;
+    }
 }

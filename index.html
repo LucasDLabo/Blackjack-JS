@@ -12,40 +12,49 @@
 <body class="bg-gray-900">
 
     <section class="flex items-center">
-        <div class="flex h-32 flex-col gap-2">
+        <div class="flex h-32 flex-col gap-2 px-3">
             <h1 class="text-5xl text-white font-extrabold">Blackjack</h1>
             <button id="btnStart" class="rounded-md bg-green-800 px-6 py-3 text-white">Start Game</button>
-            <div class="flex my-5 gap-2 items-center invisible" id="handButtons"  >
-                <button id="btnStand" class="rounded-md bg-red-800 px-6 py-3 text-white">Stand</button>
-                <button id="btnHit" class="rounded-md bg-blue-800 px-6 py-3 text-white">Hit</button>
-                <button id="btnNextHand" class="invisible rounded-md bg-gray-800 px-6 py-3 text-white">Next Hand</button>
-            </div>
         </div>
 
-        <div id="betArea" class="text-white flex w-full flex-col justify-center pl-10 invisible bg-green-950/30">
-            <h2>Place your bet</h2>
-            <div class="bg-blue-900/30 flex flex-row h-full items-center gap-10">
+        <div id="betArea" class="text-white flex px-3 border-blue-950 border-l-4 w-full h-32 flex-col justify-center invisible">
+            <h2 class="absolute top-0.5 italic font-serif">Place your bet</h2>
+            <div class="flex flex-row h-full items-center gap-5">
+
+                <div id="controls" class="flex xl:min-w-[550px] ml-5 h-full items-center">
+                    <div id="chips" class=" flex-wrap flex justify-between w-full">
+                        <button data-value="1" class="chip border-white bg-gray-500 hover:scale-105 active:scale-90">$1</button>
+                        <button data-value="5"  class="chip border-white bg-red-800 hover:scale-105 active:scale-90">$5</button>
+                        <button data-value="25"  class="chip border-white bg-green-800 hover:scale-105 active:scale-90">$25</button>
+                        <button data-value="50"  class="chip border-white bg-blue-900 hover:scale-105 active:scale-90">$50</button>
+                        <button data-value="100"  class="chip border-white bg-gray-800 hover:scale-105 active:scale-90">$100</button>
+                        <button data-value="500"  class="chip border-white bg-purple-900 hover:scale-105 active:scale-90">$500</button>
+                        <button data-value="1000"  class="chip border-white bg-orange-700 hover:scale-105 active:scale-90">$1000</button>
+                        <button data-value="5000"  class="chip border-black bg-slate-300 text-black hover:scale-105 active:scale-90">$5000</button>
+                    </div>
+                    <div id="handButtons" class="hidden justify-evenly items-center h-full w-full">
+                        <button id="btnHit" class="h-12 w-24 rounded-md bg-blue-800 text-white hover:bg-blue-700 active:scale-95 transition-transform duration-75">Hit</button>
+                        <button id="btnStand" class="h-12 w-24 rounded-md bg-red-800 text-white hover:bg-red-700 active:scale-95 transition-transform duration-75">Stand</button>
+                        <button id="btnDouble" class="h-12 w-24 rounded-md bg-green-900 text-white active:scale-95 transition-transform duration-75">Double x2</button>
+                        <button id="btnInsurance" class="h-12 w-24 rounded-md bg-cyan-600 text-white active:scale-95 transition-transform duration-75">Insurance</button>
+                    </div>
+                    <button id="btnNextHand" class="hidden rounded-md bg-gray-700 px-6 py-3 text-white">Next Hand</button>
+                </div>
                 
-                <div id="chips" class="bg-purple-500/50">
-                    <button data-value="1" class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-gray-500 font-bold transition-transform active:scale-90">$1</button>
-                    <button data-value="5"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-red-800 font-bold transition-transform active:scale-90">$5</button>
-                    <button data-value="25"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-green-800 font-bold transition-transform active:scale-90">$25</button>
-                    <button data-value="50"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-blue-900 font-bold transition-transform active:scale-90">$50</button>
-                    <button data-value="100"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-gray-800 font-bold transition-transform active:scale-90">$100</button>
-                    <button data-value="500"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-purple-900 font-bold transition-transform active:scale-90">$500</button>
-                    <button data-value="1000"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-white bg-orange-700 font-bold transition-transform active:scale-90">$1000</button>
-                    <button data-value="5000"  class="chip aspect-square w-16 rounded-full border-4 border-dotted border-black bg-slate-300 font-bold text-black transition-transform active:scale-90">$5000</button>
-                </div>
-                <div id="currentBet" class="flex flex-col bg-orange-500/50 items-center">
-                    <p>Money: $<span id="balance">1000</span></p>
-                    <span>Current Bet</span>
-                    <span class="bg-black text-center w-full">
-                        <span>$<span id="totalBet"></span></span>
+                <div id="currentBet" class="flex flex-col items-center min-w-28">
+                    <div class="font-medium text-green-500">
+                        <p>Money: $<span id="balance">1000</span></p>
+                    </div>
+                    <span class="text-sm mt-0.5">Current Bet:</span>
+                    <span class="bg-black text-center w-full flex items-center">
+                        <span class="w-full">$<span id="totalBet"></span></span>
+                        <svg id="btnClear" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute translate-x-[5.6rem] size-5 cursor-pointer">
+                            <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clipRule="evenodd" />
+                        </svg>
                     </span>
-                    <button id="btnClear" class="bg-gray-700 rounded-md w-20">Clear</button>
                 </div>
-                <div class="flex items-center bg-cyan-700/50">
-                    <button id="btnBet" class="bg-green-800 rounded-md w-16 h-10">Deal!</button>
+                <div class="flex items-center">
+                    <button id="btnBet" class="bg-green-800 rounded-md w-16 h-10 hover:bg-green-700 transition-colors active:scale-95">Deal!</button>
                 </div>
             </div>
         </div>
@@ -53,22 +62,22 @@
 
     <section id="gameBoard" class="flex h-[calc(100vh-128px)] w-full flex-col justify-center">
         <div class="relative h-full bg-orange-900/40">
-            <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-[10rem] font-bold uppercase tracking-widest">
+            <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-[10rem] 2xl:text-[200px] font-bold uppercase tracking-widest">
                 Dealer
             </div>
 
             <div class="flex h-full flex-col items-center justify-center">
-                <div id="dealerScore" class="invisible h-6 text-base font-medium text-white"></div>
-                <div id="dealerShow" class="mb-6 h-[140px]"></div>
+                <div id="dealerScore" class="invisible xl:h-6 2xl:h-7 md:text-base font-medium text-white 2xl:text-2xl"></div>
+                <div id="dealerShow" class="h-[140px] xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
         <div class="relative h-full bg-green-900/40">
-            <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-[10rem] font-bold uppercase tracking-widest">
+            <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-[10rem] 2xl:text-[200px] font-bold uppercase tracking-widest">
                 You
             </div>
             <div class="flex h-full flex-col items-center justify-center">
-                <div id="playerScore" class="text-base font-medium text-white"></div>
-                <div id="playerShow" class="mb-6 h-[140px]"></div>
+                <div id="playerScore" class="text-base font-medium text-white 2xl:text-2xl"></div>
+                <div id="playerShow" class="h-[140px] xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
     </section>

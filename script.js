@@ -1,10 +1,12 @@
 const gameBoard = document.getElementById('gameBoard');
 
+const controls = document.getElementById('controls');
 const handButtons = document.getElementById('handButtons');
-
 
 const btnHit = document.getElementById('btnHit');
 const btnStand = document.getElementById('btnStand');
+const btnDouble = document.getElementById('btnDouble');
+const btnInsurance = document.getElementById('btnInsurance');
 
 const playerScore = document.getElementById('playerScore');
 const dealerScore = document.getElementById('dealerScore');
@@ -39,10 +41,11 @@ function startGame() {
     btnStart.style.display = 'none';
     dealerScore.classList.add('invisible');
     playerScore.classList.add('invisible');
-    btnNextHand.classList.add('invisible');
+    btnNextHand.classList.add('hidden');
+    handButtons.classList.add('hidden');
 
     betArea.classList.remove('invisible');
-    chipSection.classList.remove('invisible');
+    chipSection.classList.remove('hidden');
     btnBet.classList.remove('invisible');
     btnClear.classList.remove('invisible');
     updateBalance();
@@ -56,9 +59,7 @@ chipButtons.forEach(chip => {
             currentBet += value;
             balance -= value;
             updateBalance();
-        } else {
-            alert("No tienes suficiente saldo");
-        }
+        } 
     });
 });
 
@@ -81,19 +82,25 @@ btnBet.addEventListener('click', startHand);
 function startHand(){
 
     if (currentBet == 0) {
-        alert("Introduzca una apuesta");
+        // alert("Introduzca una apuesta");
         return;
     }
+
+    btnDouble.disabled = true;
+    btnInsurance.disabled = true;
     
-    chipSection.classList.add('invisible');
+    chipSection.classList.add('hidden');
     btnBet.classList.add('invisible');
     btnClear.classList.add('invisible');
     
-    handButtons.classList.remove('invisible');
+    handButtons.classList.remove('hidden');
     playerScore.classList.remove('invisible');
     dealerScore.classList.remove('invisible');
     btnHit.classList.remove('invisible');
     btnStand.classList.remove('invisible');
+
+    handButtons.classList.add('flex');
+
 
     const bet = parseInt(totalBet.textContent);
     currentBet = bet;
@@ -258,7 +265,7 @@ function whoWin() {
     if (dealerTotal == 21 && dealerHand.length == 2 && !(playerTotal === 21 && playerHand.length === 2)){
         console.warn('NATURAL BLACKJACK. Dealer Wins');
         setTimeout(() => {
-            showResult('lose', currentBet, "Dealer has Natural Blackjack!");
+            showResult('lose', currentBet, "Dealer has Blackjack!");
         }, 1000);
         disableActions();
         return;
@@ -341,8 +348,12 @@ function disableActions() {
     btnStand.disabled = true;
     btnHit.classList.add('invisible');
     btnStand.classList.add('invisible');
+    handButtons.classList.add('hidden');
     setTimeout(() => {
-        btnNextHand.classList.remove('invisible');
+        controls.classList.remove('justify-between');
+        controls.classList.add('justify-center');
+        btnNextHand.classList.remove('hidden');
+
     }, 1000);
     
 }
