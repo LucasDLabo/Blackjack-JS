@@ -81,12 +81,17 @@ const chipSection = document.getElementById('chips');
 btnBet.addEventListener('click', startHand);
 function startHand(){
 
+    btnDouble.disabled = false;
+
     if (currentBet == 0) {
         // alert("Introduzca una apuesta");
         return;
     }
+    
+    if (balance < currentBet) {
+        btnDouble.disabled = true;
+    }
 
-    btnDouble.disabled = true;
     btnInsurance.disabled = true;
     
     chipSection.classList.add('hidden');
@@ -101,7 +106,6 @@ function startHand(){
 
     handButtons.classList.add('flex');
 
-
     const bet = parseInt(totalBet.textContent);
     currentBet = bet;
     updateBalance();
@@ -113,9 +117,12 @@ function startHand(){
     
     updateScreen(); 
 
+    if (dealerHand[0].value === 'A' && balance >= currentBet / 2) {
+        btnInsurance.disabled = false;
+    }
+
     if (calculateHandValue(playerHand) === 21 && playerHand.length === 2) {
-        btnHit.classList.add('invisible');
-        btnStand.classList.add('invisible');
+        handButtons.classList.add('hidden');
         setTimeout(() => {
             stand();
         }, 1000);
@@ -126,8 +133,9 @@ function startHand(){
 btnHit.addEventListener('click', hit);
 
 function hit() {
+    btnDouble.disabled = true;
     playerHand.push(giveCard());
-    updateScreen();
+    updatePlayerHand();
 
     if (calculateHandValue(playerHand) > 21) {
         setTimeout( () => {
@@ -144,8 +152,77 @@ function stand() {
         dealerHand.push(giveCard());
     }
     dealerScore.classList.remove('invisible');
+
     updateScreen();
     whoWin();
+}
+
+btnDouble.addEventListener('click', double);
+function double() {
+    if (balance < currentBet) {
+        return;
+    }
+
+    // Double Bet
+    balance -= currentBet;
+    currentBet *= 2;
+    updateBalance();
+
+    playerHand.push(giveCard());
+    updatePlayerHand();
+
+    btnHit.disabled = true;
+    btnStand.disabled = true;
+    btnDouble.disabled = true;
+
+    // Automatically stand
+    if (calculateHandValue(playerHand) > 21) {
+        setTimeout( () => {
+            showResult('lose', currentBet, "You went over 21!");
+        }, 1000);
+        disableActions();
+    } else {
+        setTimeout(() => {
+            stand();
+        }, 1000);
+    }
+}
+
+let insuranceBet = 0;
+btnInsurance.addEventListener('click', insurance);
+function insurance() {
+    const maxInsurance = currentBet / 2;
+
+    if (balance < maxInsurance) {
+        btnInsurance.disabled = true;
+        return;
+    }
+
+    insuranceBet = maxInsurance;
+    balance -= maxInsurance;
+    updateBalance();
+
+    btnInsurance.disabled = true;
+    dealerHand.push(giveCard());
+
+    if (calculateHandValue(dealerHand) == 21) {
+        balance += insuranceBet * 3;
+        updateScreen();
+        
+        setTimeout(() => {
+            showResult('insurance', insuranceBet * 3, "Dealer has Blackjack.");
+            updateBalance();
+            disableActions();
+        }, 1000);
+        
+    } else {
+        insuranceBet = 0;
+        setTimeout(() => {
+            showResult('lose', maxInsurance, "Dealer doesn't have Blackjack.");
+        }, 500);
+
+    }
+    
 }
 
 function generateCard() {
@@ -247,7 +324,12 @@ function updateScreen() {
 
     playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
     dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
+}
 
+function updatePlayerHand(prams) {
+    renderHand(playerHand, 'playerShow');
+
+    playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
 }
 
 function whoWin() {
@@ -255,7 +337,6 @@ function whoWin() {
     const dealerTotal = calculateHandValue(dealerHand);
 
     if (playerTotal == 21 && playerHand.length == 2  && !(dealerTotal === 21 && dealerHand.length === 2)) {
-        console.log('NATURAL BLACKJACK');
         balance += currentBet * 2.5;
         updateBalance();
         showResult('win', currentBet * 2.5, "Blackjack!");
@@ -263,7 +344,6 @@ function whoWin() {
         return;
     }
     if (dealerTotal == 21 && dealerHand.length == 2 && !(playerTotal === 21 && playerHand.length === 2)){
-        console.warn('NATURAL BLACKJACK. Dealer Wins');
         setTimeout(() => {
             showResult('lose', currentBet, "Dealer has Blackjack!");
         }, 1000);
@@ -320,14 +400,19 @@ function showResult(result, amount, comment) {
         resultMessage.textContent = comment;
         resultAmount.textContent = `+$${amount}`;
         resultAmount.className = 'text-xl font-bold text-green-700';
-    } 
-    else if (result === 'lose') {
+    } else if (result === 'lose') {
         resultTitle.textContent = 'You Lost!';
         resultTitle.className = 'text-2xl font-bold mb-4 text-red-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `-$${amount}`;
         resultAmount.className = 'text-xl font-bold text-red-700';
-    } 
+    } else if (result === 'insurance'){
+        resultTitle.textContent = 'Insurance Paid!';
+        resultTitle.className = 'text-2xl font-bold mb-4 text-blue-700';
+        resultMessage.textContent = comment;
+        resultAmount.textContent = `+$${amount}`;
+        resultAmount.className = 'text-xl font-bold text-blue-700';
+    }
     else {
         resultTitle.textContent = 'It\'s a Tie!';
         resultTitle.className = 'text-2xl font-bold mb-4 text-gray-700';
@@ -346,14 +431,11 @@ const btnNextHand = document.getElementById('btnNextHand');
 function disableActions() {
     btnHit.disabled = true;
     btnStand.disabled = true;
-    btnHit.classList.add('invisible');
-    btnStand.classList.add('invisible');
     handButtons.classList.add('hidden');
     setTimeout(() => {
         controls.classList.remove('justify-between');
         controls.classList.add('justify-center');
         btnNextHand.classList.remove('hidden');
-
     }, 1000);
     
 }
@@ -364,4 +446,5 @@ function enableActions() {
     btnStand.disabled = false;
     btnHit.classList.remove('opacity-20');
     btnStand.classList.remove('opacity-20');
+    handButtons.classList.remove('hidden');
 }
