@@ -12,6 +12,7 @@ const playerScore = document.getElementById('playerScore');
 const dealerScore = document.getElementById('dealerScore');
 
 const betArea = document.getElementById('betArea');
+const btnResetMoney = document.getElementById('btnResetMoney');
 
 let playerHand = [];
 let dealerHand = [];
@@ -48,6 +49,9 @@ function startGame() {
     chipSection.classList.remove('hidden');
     btnBet.classList.remove('invisible');
     btnClear.classList.remove('invisible');
+    if (balance <= 0) {
+        btnResetMoney.classList.remove('hidden');
+    }
     updateBalance();
 }
 
@@ -64,8 +68,16 @@ chipButtons.forEach(chip => {
 });
 
 function updateBalance() {
-    balanceDisplay.textContent = balance;
-    totalBet.textContent = currentBet;
+    balanceString = balance
+    currentBetString = currentBet
+    balanceDisplay.textContent = balanceString.toLocaleString();
+    totalBet.textContent = currentBetString.toLocaleString();
+}
+btnResetMoney.addEventListener('click', resetMoney);
+function resetMoney() {
+    balance = 1000;
+    updateBalance();
+    btnResetMoney.classList.add('hidden');
 }
 
 const btnClear = document.getElementById('btnClear');
@@ -106,8 +118,6 @@ function startHand(){
 
     handButtons.classList.add('flex');
 
-    const bet = parseInt(totalBet.textContent);
-    currentBet = bet;
     updateBalance();
     dealerHand = [];
     createDeck();
@@ -398,19 +408,19 @@ function showResult(result, amount, comment) {
         resultTitle.textContent = 'You Won!';
         resultTitle.className = 'text-2xl font-bold mb-4 text-green-700';
         resultMessage.textContent = comment;
-        resultAmount.textContent = `+$${amount}`;
+        resultAmount.textContent = `+$${amount.toLocaleString()}`;
         resultAmount.className = 'text-xl font-bold text-green-700';
     } else if (result === 'lose') {
         resultTitle.textContent = 'You Lost!';
         resultTitle.className = 'text-2xl font-bold mb-4 text-red-700';
         resultMessage.textContent = comment;
-        resultAmount.textContent = `-$${amount}`;
+        resultAmount.textContent = `-$${amount.toLocaleString()}`;
         resultAmount.className = 'text-xl font-bold text-red-700';
     } else if (result === 'insurance'){
         resultTitle.textContent = 'Insurance Paid!';
         resultTitle.className = 'text-2xl font-bold mb-4 text-blue-700';
         resultMessage.textContent = comment;
-        resultAmount.textContent = `+$${amount}`;
+        resultAmount.textContent = `+$${amount.toLocaleString()}`;
         resultAmount.className = 'text-xl font-bold text-blue-700';
     }
     else {
