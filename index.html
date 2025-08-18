@@ -79,7 +79,7 @@
             </div>
 
             <div class="flex h-full flex-col items-center justify-center">
-                <div id="dealerScore" class="invisible xl:h-6 2xl:h-7 md:text-base font-medium text-white 2xl:text-2xl"></div>
+                <div id="dealerScore" class="invisible xl:h-6 2xl:h-7 md:text-base font-medium text-white 2xl:text-xl"></div>
                 <div id="dealerShow" class="h-[140px] xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
@@ -88,16 +88,16 @@
                 You
             </div>
             <div class="flex h-full flex-col items-center justify-center">
-                <div id="playerScore" class="text-base font-medium text-white 2xl:text-2xl"></div>
+                <div id="playerScore" class="text-base font-medium text-white 2xl:text-xl"></div>
                 <div id="playerShow" class="h-[140px] xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
     </section>
 
     <div id="resultModal" class="fixed inset-0 flex items-center justify-center bg-black/50 invisible">
-        <div class="bg-neutral-300 rounded-lg shadow-lg p-6 max-w-sm text-center">
+        <div class="bg-neutral-300 rounded-lg shadow-lg p-6 max-w-60 min-w-60 2xl:max-w-72 2xl:min-w-72 text-wrap text-center">
             <h3 id="resultTitle" class="">Resultado</h3>
-            <p id="resultMessage" class="text-lg mb-2">Comentario</p>
+            <p id="resultMessage" class="text-lg mb-2 2xl:text-xl">Comentario</p>
             <p id="resultAmount" class=""></p>
             <button id="closeResult" class="mt-4 px-4 py-2 bg-green-700 text-white rounded hover:bg-green-900">
                 Close

@@ -119,7 +119,7 @@ function startHand(){
     }
 
     h2text.textContent = "Choose your action";
-    
+
     btnInsurance.disabled = true;
     
     chipSection.classList.add('hidden');
@@ -422,29 +422,29 @@ function showResult(result, amount, comment) {
 
     if (result === 'win') {
         resultTitle.textContent = 'You Win!';
-        resultTitle.className = 'text-2xl font-bold mb-4 text-green-700';
+        resultTitle.className = 'text-2xl 2xl:text-3xl font-bold mb-4 text-green-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `+$${amount.toLocaleString()}`;
-        resultAmount.className = 'text-xl font-bold text-green-700';
+        resultAmount.className = 'text-xl 2xl:text-2xl font-bold text-green-700';
     } else if (result === 'lose') {
         resultTitle.textContent = 'You Lost!';
-        resultTitle.className = 'text-2xl font-bold mb-4 text-red-700';
+        resultTitle.className = 'text-2xl 2xl:text-3xl font-bold mb-4 text-red-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `-$${amount.toLocaleString()}`;
-        resultAmount.className = 'text-xl font-bold text-red-700';
+        resultAmount.className = 'text-xl 2xl:text-2xl font-bold text-red-700';
     } else if (result === 'insurance'){
         resultTitle.textContent = 'Insurance Paid!';
-        resultTitle.className = 'text-2xl font-bold mb-4 text-blue-700';
+        resultTitle.className = 'text-2xl 2xl:text-3xl font-bold mb-4 text-blue-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `+$${amount.toLocaleString()}`;
-        resultAmount.className = 'text-xl font-bold text-blue-700';
+        resultAmount.className = 'text-xl 2xl:text-2xl font-bold text-blue-700';
     }
     else {
         resultTitle.textContent = 'It\'s a Tie!';
-        resultTitle.className = 'text-2xl font-bold mb-4 text-gray-700';
+        resultTitle.className = 'text-2xl 2xl:text-3xl font-bold mb-4 text-gray-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `$0`;
-        resultAmount.className = 'text-xl font-bold text-gray-500';
+        resultAmount.className = 'text-xl 2xl:text-2xl font-bold text-gray-500';
     }
 }
 
