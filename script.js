@@ -34,7 +34,7 @@ const savedBalance = localStorage.getItem('balance');
 if (savedBalance !== null) {
     balance = parseInt(savedBalance);
 } else {
-    balance = 1000;        // saldo inicial por defecto
+    balance = 1000;
 }
 
 const btnStart = document.getElementById('btnStart');
@@ -45,6 +45,7 @@ function startGame() {
     renderHand([], 'playerShow');
     renderHand([], 'dealerShow');
     currentBet = 0;
+    h2text.textContent = "Place your bet";
     enableActions();
     
     btnStart.style.display = 'none';
@@ -76,6 +77,8 @@ chipButtons.forEach(chip => {
 });
 
 function updateBalance() {
+    Math.floor(currentBet);
+    console.log(Math.floor(currentBet));
     balanceString = balance
     currentBetString = currentBet
     balanceDisplay.textContent = balanceString.toLocaleString();
@@ -98,6 +101,7 @@ function clearBet() {
     updateBalance();
 }
 
+const h2text = document.getElementById('h2text');
 const btnBet = document.getElementById('btnBet');
 const chipSection = document.getElementById('chips');
 btnBet.addEventListener('click', startHand);
@@ -114,6 +118,8 @@ function startHand(){
         btnDouble.disabled = true;
     }
 
+    h2text.textContent = "Choose your action";
+    
     btnInsurance.disabled = true;
     
     chipSection.classList.add('hidden');
@@ -357,9 +363,9 @@ function whoWin() {
     const dealerTotal = calculateHandValue(dealerHand);
 
     if (playerTotal == 21 && playerHand.length == 2  && !(dealerTotal === 21 && dealerHand.length === 2)) {
-        balance += currentBet * 2.5;
+        balance += Math.floor(currentBet * 2.5);
         updateBalance();
-        showResult('win', currentBet * 2.5, "Blackjack!");
+        showResult('win', Math.floor(currentBet * 2.5), "Blackjack!");
         disableActions();
         return;
     }
@@ -415,7 +421,7 @@ function showResult(result, amount, comment) {
     resultAmount.className = '';
 
     if (result === 'win') {
-        resultTitle.textContent = 'You Won!';
+        resultTitle.textContent = 'You Win!';
         resultTitle.className = 'text-2xl font-bold mb-4 text-green-700';
         resultMessage.textContent = comment;
         resultAmount.textContent = `+$${amount.toLocaleString()}`;
@@ -451,8 +457,12 @@ const btnNextHand = document.getElementById('btnNextHand');
 function disableActions() {
     btnHit.disabled = true;
     btnStand.disabled = true;
-    handButtons.classList.add('hidden');
+    btnDouble.disabled = true;
+    btnInsurance.disabled = true;
+    
     setTimeout(() => {
+        h2text.textContent = "";
+        handButtons.classList.add('hidden');
         controls.classList.remove('justify-between');
         controls.classList.add('justify-center');
         btnNextHand.classList.remove('hidden');
