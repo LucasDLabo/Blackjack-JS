@@ -78,7 +78,6 @@ chipButtons.forEach(chip => {
 
 function updateBalance() {
     Math.floor(currentBet);
-    console.log(Math.floor(currentBet));
     balanceString = balance
     currentBetString = currentBet
     balanceDisplay.textContent = balanceString.toLocaleString();
@@ -148,9 +147,10 @@ function startHand(){
     }
 
     if (calculateHandValue(playerHand) === 21 && playerHand.length === 2) {
+        const playerHasBlackjack = true;
         handButtons.classList.add('hidden');
         setTimeout(() => {
-            stand();
+            stand(playerHasBlackjack);
         }, 1000);
         
     }
@@ -160,27 +160,86 @@ btnHit.addEventListener('click', hit);
 
 function hit() {
     btnDouble.disabled = true;
+    btnInsurance.disabled = true;
     playerHand.push(giveCard());
     updatePlayerHand();
 
     if (calculateHandValue(playerHand) > 21) {
+        btnHit.disabled = true;
+        btnStand.disabled = true;
         setTimeout( () => {
             showResult('lose', currentBet, "You went over 21!");
+            disableActions();
         }, 1000);
-        disableActions();
+        
     }
 }
 
 btnStand.addEventListener('click', stand);
-function stand() {
+async function stand(playerHasBlackjack) {
     // Dealer plays...
-    while (calculateHandValue(dealerHand) < 17) {
+    // while (calculateHandValue(dealerHand) < 17) {
+    //     dealerHand.push(giveCard());
+    // }
+
+    btnHit.disabled = true;
+    btnStand.disabled = true;
+    btnDouble.disabled = true;
+
+    // player has blackjack?
+    if (playerHasBlackjack === true) {
         dealerHand.push(giveCard());
+        updateDealerHand() 
+        await sleep(500);
+        updateScreen();
+        whoWin();
+        return
+    }
+
+    //Soft 17
+    while (true) {
+        const total = calculateHandValue(dealerHand);
+
+        // less than 17? hit 
+        if (total < 17) {
+            dealerHand.push(giveCard());
+            updateDealerHand() 
+            await sleep(1000);
+        }
+        // is soft17? hit
+        else if (total === 17 && isSoft17(dealerHand)) {
+            console.info('SOFT17!');
+            dealerHand.push(giveCard());
+            updateDealerHand()
+            await sleep(1000);
+        }
+        // more than 17? stand
+        else {
+            break;
+        }
     }
     dealerScore.classList.remove('invisible');
 
     updateScreen();
-    whoWin();
+    await whoWin();
+}
+
+function isSoft17(hand) {
+    let total = 0;
+    let aces = 0;
+
+    for (const card of hand) {
+        if (card.value === "A") {
+            total += 11;
+            aces++;
+        } else if (["K","Q","J"].includes(card.value)) {
+            total += 10;
+        } else {
+            total += parseInt(card.value);
+        }
+    }
+
+    return total === 17 && aces > 0;
 }
 
 btnDouble.addEventListener('click', double);
@@ -205,8 +264,9 @@ function double() {
     if (calculateHandValue(playerHand) > 21) {
         setTimeout( () => {
             showResult('lose', currentBet, "You went over 21!");
+            disableActions();
         }, 1000);
-        disableActions();
+        
     } else {
         setTimeout(() => {
             stand();
@@ -218,6 +278,10 @@ let insuranceBet = 0;
 btnInsurance.addEventListener('click', insurance);
 function insurance() {
     const maxInsurance = currentBet / 2;
+
+    btnHit.disabled = true;
+    btnStand.disabled = true;
+    btnDouble.disabled = true;
 
     if (balance < maxInsurance) {
         btnInsurance.disabled = true;
@@ -236,7 +300,7 @@ function insurance() {
         updateScreen();
         
         setTimeout(() => {
-            showResult('insurance', insuranceBet * 3, "Dealer has Blackjack.");
+            showResult('insurance', Math.floor(insuranceBet * 3), "Dealer has Blackjack.");
             updateBalance();
             disableActions();
         }, 1000);
@@ -245,6 +309,9 @@ function insurance() {
         insuranceBet = 0;
         setTimeout(() => {
             showResult('lose', maxInsurance, "Dealer doesn't have Blackjack.");
+            btnHit.disabled = false;
+            btnStand.disabled = false;
+            btnDouble.disabled = false;
         }, 500);
 
     }
@@ -352,15 +419,23 @@ function updateScreen() {
     dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
 }
 
-function updatePlayerHand(prams) {
+function updatePlayerHand() {
     renderHand(playerHand, 'playerShow');
 
     playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
 }
 
-function whoWin() {
+function updateDealerHand() {
+    renderHand(dealerHand, 'dealerShow');
+
+    dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
+}
+
+async function whoWin() {
     const playerTotal = calculateHandValue(playerHand);
     const dealerTotal = calculateHandValue(dealerHand);
+
+    await sleep(500); 
 
     if (playerTotal == 21 && playerHand.length == 2  && !(dealerTotal === 21 && dealerHand.length === 2)) {
         balance += Math.floor(currentBet * 2.5);
@@ -370,9 +445,9 @@ function whoWin() {
         return;
     }
     if (dealerTotal == 21 && dealerHand.length == 2 && !(playerTotal === 21 && playerHand.length === 2)){
-        setTimeout(() => {
+        
             showResult('lose', currentBet, "Dealer has Blackjack!");
-        }, 1000);
+        
         disableActions();
         return;
     }
@@ -381,28 +456,28 @@ function whoWin() {
         console.log("El dealer se pasó. ¡Ganas!");
         balance += currentBet * 2;
         updateBalance();
-        setTimeout( () => {
+        
             showResult('win', currentBet * 2, "Dealer busts!");
-        }, 1000);
+        
     } else if (playerTotal > dealerTotal) {
         console.log("¡Le ganas al Dealer!");
         balance += currentBet * 2;
         updateBalance();
-        setTimeout( () => {
+        
             showResult('win', currentBet * 2, "You beat the Dealer!");
-        }, 1000);
+        
     } else if (playerTotal < dealerTotal) {
         console.warn("¡Pierdes!");
-        setTimeout( () => {
+        
             showResult('lose', currentBet, "Dealer wins this hand!");
-        }, 1000);
+        
     } else {
         console.info("Push!");
         balance += currentBet;
         updateBalance();
-        setTimeout( () => {
+        
             showResult('tie', 0, "Push!");
-        }, 1000);
+        
         
     }
     disableActions();
@@ -467,7 +542,7 @@ function disableActions() {
         controls.classList.add('justify-center');
         btnNextHand.classList.remove('hidden');
         btnNextHand.classList.add('flex');
-    }, 1000);
+    }, 1);
     
 }
 
@@ -478,4 +553,8 @@ function enableActions() {
     btnHit.classList.remove('opacity-20');
     btnStand.classList.remove('opacity-20');
     handButtons.classList.remove('hidden');
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
