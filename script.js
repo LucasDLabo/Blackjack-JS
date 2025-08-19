@@ -23,6 +23,7 @@ const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
 
 let balance = 0;
 let currentBet = 0;
+let isInsuranceCardGenerated = false;
 const totalBet = document.getElementById('totalBet');
 
 const balanceDisplay = document.getElementById('balance');
@@ -42,8 +43,8 @@ btnStart.addEventListener('click', startGame);
 
 function startGame() {
     console.clear();
-    // renderHand([], 'playerShow');
-    // renderHand([], 'dealerShow');
+    renderHand([], 'playerShow');
+    renderHand([], 'dealerShow');
     currentBet = 0;
     h2text.textContent = "Place your bet";
     enableActions();
@@ -212,6 +213,12 @@ async function stand(playerHasBlackjack) {
         return
     }
 
+    if (isInsuranceCardGenerated == true) {
+        updateDealerHand();
+        isInsuranceCardGenerated = false;
+        await sleep(1000);
+    }
+
     //Soft 17
     while (true) {
         const total = calculateHandValue(dealerHand);
@@ -313,7 +320,8 @@ function insurance() {
 
     if (calculateHandValue(dealerHand) == 21) {
         balance += insuranceBet * 3;
-        updateScreen();
+        //updateScreen();
+        updateDealerHand();
         
         setTimeout(() => {
             showResult('insurance', Math.floor(insuranceBet * 3), "Dealer has Blackjack.");
@@ -328,6 +336,7 @@ function insurance() {
             btnHit.disabled = false;
             btnStand.disabled = false;
             btnDouble.disabled = false;
+            isInsuranceCardGenerated = true;
         }, 500);
 
     }
@@ -441,7 +450,7 @@ function updatePlayerHand() {
     // playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
 
     const newCard = playerHand[playerHand.length - 1]
-    console.log(newCard);
+    // console.log(newCard);
     renderSingleCard(newCard, 'playerShow', true);
     //renderHand(playerHand, 'playerShow');
 
@@ -451,7 +460,7 @@ function updatePlayerHand() {
 function updateDealerHand() {
 
     const newCard = dealerHand[dealerHand.length - 1]
-    console.log(newCard);
+    //console.log(newCard);
     renderSingleCard(newCard, 'dealerShow', true);
     //renderHand(dealerHand, 'dealerShow');
 
