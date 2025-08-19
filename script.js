@@ -42,8 +42,8 @@ btnStart.addEventListener('click', startGame);
 
 function startGame() {
     console.clear();
-    renderHand([], 'playerShow');
-    renderHand([], 'dealerShow');
+    // renderHand([], 'playerShow');
+    // renderHand([], 'dealerShow');
     currentBet = 0;
     h2text.textContent = "Place your bet";
     enableActions();
@@ -103,10 +103,18 @@ function clearBet() {
 const h2text = document.getElementById('h2text');
 const btnBet = document.getElementById('btnBet');
 const chipSection = document.getElementById('chips');
+let currentAnimationIndex = 0;
+const animations = ['flip-card', 'slide-in', 'zoom', 'slide-down'];
 btnBet.addEventListener('click', startHand);
 function startHand(){
 
     btnDouble.disabled = false;
+
+    //Change animations
+    currentAnimationIndex++;
+    if (currentAnimationIndex >= animations.length) {
+        currentAnimationIndex = 0;
+    }
 
     if (currentBet == 0) {
         // alert("Introduzca una apuesta");
@@ -449,6 +457,7 @@ function updateDealerHand() {
 
     dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
 }
+
 function renderSingleCard(card, elementId, animate = false) {
     const container = document.getElementById(elementId);
 
@@ -456,7 +465,7 @@ function renderSingleCard(card, elementId, animate = false) {
     cardDiv.classList.add('card');
 
     if (animate) {
-        cardDiv.classList.add('flip-card');
+        cardDiv.classList.add(animations[currentAnimationIndex]); 
     }
 
     if (card.suit === '♦' || card.suit === '♥') {
