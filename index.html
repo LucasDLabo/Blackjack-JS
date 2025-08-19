@@ -33,10 +33,36 @@
                         <button data-value="5000"  class="chip border-black bg-slate-300 text-black hover:opacity-85 active:scale-95">$5000</button>
                     </div>
                     <div id="handButtons" class="hidden justify-evenly items-center h-full w-full">
-                        <button id="btnHit" class="h-12 w-24 rounded-md bg-blue-800 text-white hover:bg-blue-700 active:scale-95 transition-transform duration-75">Hit</button>
-                        <button id="btnStand" class="h-12 w-24 rounded-md bg-red-800 text-white hover:bg-red-700 active:scale-95 transition-transform duration-75">Stand</button>
-                        <button id="btnDouble" class="h-12 w-24 rounded-md bg-green-900 text-white active:scale-95 transition-transform duration-75">Double x2</button>
-                        <button id="btnInsurance" class="h-12 w-24 rounded-md bg-cyan-600 text-white active:scale-95 transition-transform duration-75">Insurance</button>
+                        <button id="btnHit" class="h-12 w-28 flex items-center justify-center rounded-md bg-blue-800 text-white hover:bg-blue-700 active:scale-95 transition-transform duration-75">
+                            <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Hit</span>
+                            <div class=" h-6 w-6 aspect-square mx-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg> 
+                            </div>
+                        </button>
+                        <button id="btnStand" class="h-12 w-28 flex items-center justify-center rounded-md bg-red-800 text-white hover:bg-red-700 active:scale-95 transition-transform duration-75">
+                            <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Stand</span>
+                            <div class=" h-6 w-6 aspect-square">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 256 256">
+                                    <path d="M188,88a27.75,27.75,0,0,0-12,2.71V60a28,28,0,0,0-41.36-24.6A28,28,0,0,0,80,44v6.71A27.75,27.75,0,0,0,68,48,28,28,0,0,0,40,76v76a88,88,0,0,0,176,0V116A28,28,0,0,0,188,88Zm12,64a72,72,0,0,1-144,0V76a12,12,0,0,1,24,0v44a8,8,0,0,0,16,0V44a12,12,0,0,1,24,0v68a8,8,0,0,0,16,0V60a12,12,0,0,1,24,0v68.67A48.08,48.08,0,0,0,120,176a8,8,0,0,0,16,0,32,32,0,0,1,32-32,8,8,0,0,0,8-8V116a12,12,0,0,1,24,0Z"></path>
+                                </svg>
+                            </div>
+                        </button>
+                        <button id="btnDouble" class="h-12 w-28 flex items-center justify-center rounded-md bg-green-900 text-white active:scale-95 transition-transform duration-75">
+                            <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Double</span>
+                            <div class="w-6 h-6 aspect-square">
+                                <span class="font-bold text-md">x2</span>
+                            </div>
+                        </button>
+                        <button id="btnInsurance" class="h-12 w-28 flex items-center justify-center rounded-md bg-cyan-600 text-white active:scale-95 transition-transform duration-75">
+                            <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Insurance</span>
+                            <div class=" h-6 w-6 aspect-square">
+                                <svg class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z"/>
+                                </svg>
+                            </div>
+                        </button>
                     </div>
                     <div>
                         <button id="btnNextHand" class="hidden rounded-md bg-gray-700 w-32 py-3 text-white justify-center items-center gap-0.5 hover:bg-gray-600 active:scale-95">
