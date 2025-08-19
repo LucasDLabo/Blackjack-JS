@@ -140,7 +140,9 @@ function startHand(){
     playerHand = [giveCard(), giveCard()];
     dealerHand = [giveCard()];
     
-    updateScreen(); 
+    // updatePlayerHand();
+    renderPlayerInitialHand() 
+    renderDealerInitialHand() 
 
     if (dealerHand[0].value === 'A' && balance >= currentBet / 2) {
         btnInsurance.disabled = false;
@@ -148,7 +150,13 @@ function startHand(){
 
     if (calculateHandValue(playerHand) === 21 && playerHand.length === 2) {
         const playerHasBlackjack = true;
-        handButtons.classList.add('hidden');
+        // handButtons.classList.add('hidden');
+
+        btnHit.disabled = true;
+        btnStand.disabled = true;
+        btnDouble.disabled = true;
+        btnInsurance.disabled = true;
+
         setTimeout(() => {
             stand(playerHasBlackjack);
         }, 1000);
@@ -420,14 +428,76 @@ function updateScreen() {
 }
 
 function updatePlayerHand() {
-    renderHand(playerHand, 'playerShow');
+    // renderHand(playerHand, 'playerShow');
+
+    // playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
+
+    const newCard = playerHand[playerHand.length - 1]
+    console.log(newCard);
+    renderSingleCard(newCard, 'playerShow', true);
+    //renderHand(playerHand, 'playerShow');
 
     playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
 }
 
 function updateDealerHand() {
-    renderHand(dealerHand, 'dealerShow');
 
+    const newCard = dealerHand[dealerHand.length - 1]
+    console.log(newCard);
+    renderSingleCard(newCard, 'dealerShow', true);
+    //renderHand(dealerHand, 'dealerShow');
+
+    dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
+}
+function renderSingleCard(card, elementId, animate = false) {
+    const container = document.getElementById(elementId);
+
+    const cardDiv = document.createElement('div');
+    cardDiv.classList.add('card');
+
+    if (animate) {
+        cardDiv.classList.add('flip-card');
+    }
+
+    if (card.suit === '♦' || card.suit === '♥') {
+        cardDiv.classList.add('red');
+    } else {
+        cardDiv.classList.add('black');
+    }
+
+    // Top-left
+    const topLeft = document.createElement('div');
+    topLeft.classList.add('top-left');
+    topLeft.innerHTML = `${card.value}<br>${card.suit}`;
+
+    // Center
+    const center = document.createElement('div');
+    center.classList.add('center');
+    center.textContent = card.suit;
+
+    // Bottom-right
+    const bottomRight = document.createElement('div');
+    bottomRight.classList.add('bottom-right');
+    bottomRight.innerHTML = `${card.value}<br>${card.suit}`;
+
+    cardDiv.appendChild(topLeft);
+    cardDiv.appendChild(center);
+    cardDiv.appendChild(bottomRight);
+
+    container.appendChild(cardDiv);
+}
+function renderPlayerInitialHand() {
+    const container = document.getElementById('playerShow');
+    container.innerHTML = '';
+
+    playerHand.forEach(card => renderSingleCard(card, 'playerShow', true));
+    playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
+}
+function renderDealerInitialHand() {
+    const container = document.getElementById('dealerShow');
+    container.innerHTML = '';
+
+    dealerHand.forEach(card => renderSingleCard(card, 'dealerShow', true));
     dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
 }
 
@@ -446,7 +516,7 @@ async function whoWin() {
     }
     if (dealerTotal == 21 && dealerHand.length == 2 && !(playerTotal === 21 && playerHand.length === 2)){
         
-            showResult('lose', currentBet, "Dealer has Blackjack!");
+        showResult('lose', currentBet, "Dealer has Blackjack!");
         
         disableActions();
         return;
