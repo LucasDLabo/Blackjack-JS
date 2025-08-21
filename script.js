@@ -49,6 +49,7 @@ createDeck(2);
 shuffleDeck();
     
 totalCounter.textContent = `Total Cards: ${deck.length}`;
+totalCounter.setAttribute('title', `${deck.length} cards is equal to 2 Decks`);
 remainingCounter.innerHTML = `Remaining: <span class="text-green-400 font-bold">${deck.length}</span>`;
 
 const btnStart = document.getElementById('btnStart');
