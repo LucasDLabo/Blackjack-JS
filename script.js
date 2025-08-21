@@ -49,6 +49,7 @@ createDeck(2);
 shuffleDeck();
     
 totalCounter.textContent = `Total Cards: ${deck.length}`;
+remainingCounter.innerHTML = `Remaining: <span class="text-green-400 font-bold">${deck.length}</span>`;
 
 const btnStart = document.getElementById('btnStart');
 btnStart.addEventListener('click', startGame);
@@ -87,9 +88,9 @@ function startGame() {
         showResult('newDeck', 0, "New deck created and shuffled!");
 
         givenCards = 0;
-        givenCounter.textContent = `Cards given: ${givenCards}`;
+        givenCounter.innerHTML = `Cards given: <span class="text-blue-400 font-bold">${givenCards}</span>`;
 
-        remainingCounter.textContent = `Cards remaining: ${deck.length}`;
+        remainingCounter.innerHTML = `Remaining: <span class="text-green-400 font-bold">${deck.length}</span>`;
 
         isDeckLow = false;
     }
@@ -260,7 +261,7 @@ async function stand(playerHasBlackjack) {
         updateDealerHand();
         isInsuranceCardGenerated = false;
         givenCards += 1;
-        givenCounter.textContent = `Cards given: ${givenCards}`;
+        givenCounter.innerHTML = `Cards given: <span class="text-blue-400 font-bold">${givenCards}</span>`;
         await sleep(1000);
     }
 
@@ -486,9 +487,9 @@ function giveCard(){
         isDeckLow = true;
     }
     givenCards += 1;
-    givenCounter.textContent = `Cards given: ${givenCards}`;
+    givenCounter.innerHTML = `Cards given: <span class="text-blue-400 font-bold">${givenCards}</span>`;
 
-    remainingCounter.textContent = `Cards remaining: ${deck.length - 1}`;
+    remainingCounter.innerHTML = `Remaining: <span class="text-green-400 font-bold">${deck.length - 1}</span>`;
 
     return deck.pop();
 }

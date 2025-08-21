@@ -32,32 +32,32 @@
                         <button data-value="1000"  class="chip border-white bg-orange-700 hover:opacity-85 active:scale-95">$1000</button>
                         <button data-value="5000"  class="chip border-black bg-slate-300 text-black hover:opacity-85 active:scale-95">$5000</button>
                     </div>
-                    <div id="handButtons" class="hidden justify-evenly items-center h-full w-full">
-                        <button id="btnHit" class="h-12 w-28 flex items-center justify-center rounded-md bg-blue-800 text-white hover:bg-blue-700 disabled:hover:bg-blue-800 active:scale-95 transition-transform duration-75">
+                    <div id="handButtons" class="hidden justify-evenly items-center h-full w-full 2xl:gap-5">
+                        <button id="btnHit" class="h-12 w-28 2xl:w-32 flex items-center justify-center rounded-md bg-blue-800 text-white hover:bg-blue-700 disabled:hover:bg-blue-800 active:scale-95 transition-transform duration-75">
                             <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Hit</span>
-                            <div class=" h-6 w-6 aspect-square mx-0.5">
+                            <div class=" h-6 w-6 2xl:h-8 2xl:w-8 aspect-square mx-0.5">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg> 
                             </div>
                         </button>
-                        <button id="btnStand" class="h-12 w-28 flex items-center justify-center rounded-md bg-red-800 text-white hover:bg-red-700 disabled:hover:bg-red-800 active:scale-95 transition-transform duration-75">
+                        <button id="btnStand" class="h-12 w-28 2xl:w-32 flex items-center justify-center rounded-md bg-red-800 text-white hover:bg-red-700 disabled:hover:bg-red-800 active:scale-95 transition-transform duration-75">
                             <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Stand</span>
-                            <div class=" h-6 w-6 aspect-square">
+                            <div class="h-6 w-6 2xl:h-8 2xl:w-8 aspect-square">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 256 256">
                                     <path d="M188,88a27.75,27.75,0,0,0-12,2.71V60a28,28,0,0,0-41.36-24.6A28,28,0,0,0,80,44v6.71A27.75,27.75,0,0,0,68,48,28,28,0,0,0,40,76v76a88,88,0,0,0,176,0V116A28,28,0,0,0,188,88Zm12,64a72,72,0,0,1-144,0V76a12,12,0,0,1,24,0v44a8,8,0,0,0,16,0V44a12,12,0,0,1,24,0v68a8,8,0,0,0,16,0V60a12,12,0,0,1,24,0v68.67A48.08,48.08,0,0,0,120,176a8,8,0,0,0,16,0,32,32,0,0,1,32-32,8,8,0,0,0,8-8V116a12,12,0,0,1,24,0Z"></path>
                                 </svg>
                             </div>
                         </button>
-                        <button id="btnDouble" class="h-12 w-28 flex items-center justify-center rounded-md bg-green-900 text-white hover:bg-green-800 disabled:hover:bg-green-900 active:scale-95 transition-transform duration-75">
+                        <button id="btnDouble" class="h-12 w-28 2xl:w-32 flex items-center justify-center rounded-md bg-green-900 text-white hover:bg-green-800 disabled:hover:bg-green-900 active:scale-95 transition-transform duration-75">
                             <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Double</span>
-                            <div class="w-6 h-6 aspect-square">
-                                <span class="font-bold text-md">x2</span>
+                            <div class="w-6 h-6 2xl:h-8 2xl:w-8 aspect-square">
+                                <span class="font-bold text-md 2xl:text-xl">x2</span>
                             </div>
                         </button>
-                        <button id="btnInsurance" class="flex h-12 w-28 items-center justify-center rounded-md bg-cyan-600 text-white transition-transform duration-75 hover:bg-cyan-500 active:scale-95 disabled:hover:bg-cyan-600">
+                        <button id="btnInsurance" class="flex h-12 w-28 2xl:w-32 items-center justify-center rounded-md bg-cyan-600 text-white transition-transform duration-75 hover:bg-cyan-500 active:scale-95 disabled:hover:bg-cyan-600">
                             <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Insurance</span>
-                            <div class=" h-6 w-6 aspect-square">
+                            <div class=" h-6 w-6 2xl:h-8 2xl:w-8 aspect-square">
                                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20a16.405 16.405 0 0 1-5.092-5.804A16.694 16.694 0 0 1 5 6.666L12 4l7 2.667a16.695 16.695 0 0 1-1.908 7.529A16.406 16.406 0 0 1 12 20Z"/>
                                 </svg>
@@ -124,9 +124,13 @@
             <h2 id="" class="absolute top-0.5 italic font-semibold text-sm text-gray-600">Running Count</h2>
             
             <div class="flex flex-col items-center">
-            <h3 id="totalCounter" class="font-bold text-white text-xl py-1">Total Cards: 104</h3>
-            <h4 id="givenCounter" class="font-bold text-white">Cards given: 0</h4>
-            <h4 id="remainingCounter"class="font-bold text-white">Cards remaining: 0</h4>
+                <h3 id="totalCounter" class="font-bold text-slate-400 text-base py-1">Total Cards: asdas</h3>
+                <h4 id="givenCounter" class="font-medium text-gray-300 bg-slate-800 w-7/12 text-center py-0.5 rounded-lg mb-1">
+                    Cards given: <span class="text-blue-400 font-bold">0</span>
+                </h4>
+                <h4 id="remainingCounter"class="font-medium text-gray-300 bg-slate-800 w-7/12 text-center py-0.5 rounded-lg">
+                    Remaining: <span class="text-green-400 font-bold">asdsa</span>
+                </h4>
             </div>
         </div>
     </section>
