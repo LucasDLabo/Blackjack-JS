@@ -11,14 +11,14 @@
 
 <body class="bg-gray-900">
 
-    <section class="flex items-center">
-        <div class="flex h-32 flex-col gap-2 px-3">
-            <h1 class="text-5xl text-white font-extrabold">Blackjack</h1>
+    <section class="flex items-center justify-between">
+        <div class="flex h-32 flex-col gap-3 px-3 justify-center">
+            <h1 class="text-4xl text-white font-extrabold italic">Blackjack<span class="text-[#F0DB4F] not-italic">JS</span> </h1>
             <button id="btnStart" class="rounded-md bg-green-800 px-6 py-3 text-white">Start Game</button>
         </div>
 
-        <div id="betArea" class="text-white flex px-3 border-slate-800 border-l-4 w-full h-32 flex-col justify-center invisible">
-            <h2 id="h2text" class="absolute top-0.5 italic font-serif font-semibold">Place your bet</h2>
+        <div id="betArea" class="text-white flex px-3 border-slate-800 border-l-4 max-w-full h-32 flex-col justify-center invisible">
+            <h2 id="h2text" class="absolute top-0.5 italic font-semibold text-sm text-gray-600">Place your bet</h2>
             <div class="flex flex-row h-full items-center gap-5">
 
                 <div id="controls" class="flex xl:min-w-[550px] ml-5 h-full items-center">
@@ -80,7 +80,7 @@
                 
                 <div id="currentBet" class="flex flex-col items-center min-w-28">
                     <div class="font-medium text-green-500 flex items-center">
-                        <p>Money: $<span id="balance">1000</span></p>
+                        <p class="text-center">Money: $<span id="balance">1000</span></p>
                         <svg id="btnResetMoney" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-white ml-1 hidden cursor-pointer">
                             <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
                         </svg>
@@ -97,6 +97,17 @@
                 <div class="flex items-center">
                     <button id="btnBet" class="bg-green-800 rounded-md w-16 h-10 hover:bg-green-700 transition-colors active:scale-95">Deal!</button>
                 </div>
+
+            </div>
+        </div>
+
+        <div id="runningCount" class="hidden border-slate-800 justify-center border-l-4 w-full h-32 flex-col px-3">
+            <h2 id="" class="absolute top-0.5 italic font-semibold text-sm text-gray-600">Running Count</h2>
+            
+            <div class="flex flex-col items-center">
+            <h3 id="totalCounter" class="font-bold text-white text-xl py-1">Total Cards: 104</h3>
+            <h4 id="givenCounter" class="font-bold text-white">Cards given: 0</h4>
+            <h4 id="remainingCounter"class="font-bold text-white">Cards remaining: 0</h4>
             </div>
         </div>
     </section>

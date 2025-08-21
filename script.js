@@ -20,6 +20,12 @@ let dealerHand = [];
 let deck = [];
 const suits = ['♠','♣','♦','♥'];
 const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
+let isDeckLow = false;
+
+const runningCount = document.getElementById('runningCount');
+const totalCounter = document.getElementById('totalCounter');
+const givenCounter = document.getElementById('givenCounter');
+const remainingCounter = document.getElementById('remainingCounter');
 
 let balance = 0;
 let currentBet = 0;
@@ -38,6 +44,11 @@ if (savedBalance !== null) {
     balance = 1000;
 }
 
+createDeck(2);
+shuffleDeck();
+    
+totalCounter.textContent = `Total Cards: ${deck.length}`;
+
 const btnStart = document.getElementById('btnStart');
 btnStart.addEventListener('click', startGame);
 
@@ -49,20 +60,36 @@ function startGame() {
     h2text.textContent = "Place your bet";
     enableActions();
     
-    btnStart.style.display = 'none';
+    btnStart.disabled = true;
     dealerScore.classList.add('invisible');
     playerScore.classList.add('invisible');
     btnNextHand.classList.add('hidden');
     handButtons.classList.add('hidden');
+    runningCount.classList.add('flex');
 
     betArea.classList.remove('invisible');
     chipSection.classList.remove('hidden');
     btnBet.classList.remove('invisible');
     btnClear.classList.remove('invisible');
+    runningCount.classList.remove('hidden');
     if (balance <= 0) {
         btnResetMoney.classList.remove('hidden');
     }
     updateBalance();
+    
+    if (isDeckLow == true) {
+        createDeck(2);
+        shuffleDeck();
+        showResult('newDeck', 0, "New deck created and shuffled!");
+
+        givenCards = 0;
+        givenCounter.textContent = `Cards given: ${givenCards}`;
+
+        remainingCounter.textContent = `Cards remaining: ${deck.length}`;
+
+        isDeckLow = false;
+    }
+    
 }
 
 const chipButtons = document.querySelectorAll('.chip');
@@ -144,8 +171,7 @@ function startHand(){
 
     updateBalance();
     dealerHand = [];
-    createDeck();
-    shuffleDeck();
+
     playerHand = [giveCard(), giveCard()];
     dealerHand = [giveCard()];
     
@@ -216,6 +242,8 @@ async function stand(playerHasBlackjack) {
     if (isInsuranceCardGenerated == true) {
         updateDealerHand();
         isInsuranceCardGenerated = false;
+        givenCards += 1;
+        givenCounter.textContent = `Cards given: ${givenCards}`;
         await sleep(1000);
     }
 
@@ -316,6 +344,7 @@ function insurance() {
     updateBalance();
 
     btnInsurance.disabled = true;
+    givenCards -= 1;
     dealerHand.push(giveCard());
 
     if (calculateHandValue(dealerHand) == 21) {
@@ -415,13 +444,16 @@ function calculateHandValue(hand) {
     return value;
 }
 
-function createDeck() {
+function createDeck(numberOfDecks = 2) {
     deck = [];
-    for (const suit of suits) {
-        for (const value of values) {
-            deck.push({value, suit});
+    for (let i = 0; i < numberOfDecks; i++) {
+        for (const suit of suits) {
+            for (const value of values) {
+                deck.push({value, suit});
+            }
         }
     }
+    
 }
 
 // Fisher–Yates Shuffle
@@ -431,8 +463,16 @@ function shuffleDeck() {
         [deck[i],deck[n]] = [deck[n], deck[i]];
     }
 }
-
+let givenCards = 0;
 function giveCard(){
+    if (deck.length <= 20) {
+        isDeckLow = true;
+    }
+    givenCards += 1;
+    givenCounter.textContent = `Cards given: ${givenCards}`;
+
+    remainingCounter.textContent = `Cards remaining: ${deck.length - 1}`;
+
     return deck.pop();
 }
 
@@ -601,6 +641,12 @@ function showResult(result, amount, comment) {
         resultMessage.textContent = comment;
         resultAmount.textContent = `+$${amount.toLocaleString()}`;
         resultAmount.className = 'text-xl 2xl:text-2xl font-bold text-blue-700';
+    } else if (result === 'newDeck'){
+        resultTitle.textContent = 'Cards are getting low!';
+        resultTitle.className = 'mb-4 text-2xl font-bold text-purple-700 2xl:text-3xl';
+        resultMessage.textContent = comment;
+        resultAmount.textContent = ``;
+        resultAmount.className = 'hidden';
     }
     else {
         resultTitle.textContent = 'It\'s a Tie!';
