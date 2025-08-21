@@ -111,7 +111,6 @@ function updateBalance() {
     balanceDisplay.textContent = balanceString.toLocaleString();
     totalBet.textContent = currentBetString.toLocaleString();
 
-    localStorage.setItem('balance', balance);
 }
 btnResetMoney.addEventListener('click', resetMoney);
 function resetMoney() {
@@ -136,6 +135,8 @@ const animations = ['flip-card', 'slide-in', 'zoom', 'slide-down'];
 btnBet.addEventListener('click', startHand);
 function startHand(){
 
+    localStorage.setItem('balance', balance);
+    
     btnDouble.disabled = false;
 
     //Change animations
