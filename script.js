@@ -13,6 +13,7 @@ const dealerScore = document.getElementById('dealerScore');
 
 const betArea = document.getElementById('betArea');
 const btnResetMoney = document.getElementById('btnResetMoney');
+const btnAllin = document.getElementById('btnAllin');
 
 let playerHand = [];
 let dealerHand = [];
@@ -71,9 +72,12 @@ function startGame() {
     chipSection.classList.remove('hidden');
     btnBet.classList.remove('invisible');
     btnClear.classList.remove('invisible');
+    btnAllin.classList.remove('hidden');
     runningCount.classList.remove('hidden');
+    
     if (balance <= 0) {
         btnResetMoney.classList.remove('hidden');
+        btnAllin.classList.add('hidden');
     }
     updateBalance();
     
@@ -117,6 +121,17 @@ function resetMoney() {
     balance = 1000;
     updateBalance();
     btnResetMoney.classList.add('hidden');
+    btnAllin.classList.remove('hidden');
+}
+
+btnAllin.addEventListener('click', allin);
+function allin() {
+    console.log(currentBet);
+    balance += currentBet;
+    currentBet = 0;
+    currentBet = balance;
+    balance -=  currentBet;
+    updateBalance();
 }
 
 const btnClear = document.getElementById('btnClear');
@@ -136,7 +151,7 @@ btnBet.addEventListener('click', startHand);
 function startHand(){
 
     localStorage.setItem('balance', balance);
-    
+
     btnDouble.disabled = false;
 
     //Change animations
@@ -161,6 +176,7 @@ function startHand(){
     chipSection.classList.add('hidden');
     btnBet.classList.add('invisible');
     btnClear.classList.add('invisible');
+    btnAllin.classList.add('hidden');
     
     handButtons.classList.remove('hidden');
     playerScore.classList.remove('invisible');

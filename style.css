@@ -88,6 +88,9 @@
         font-size: 25px;
         bottom: 0px;
     }
+    .chip{
+        width: 5rem;
+    }
 }
 
 /* Flip */
