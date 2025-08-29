@@ -57,6 +57,10 @@ btnStart.addEventListener('click', startGame);
 
 function startGame() {
     console.clear();
+
+    const startSection = document.getElementById('startSection');
+    startSection.classList.add("hidden"); 
+
     renderHand([], 'playerShow');
     renderHand([], 'dealerShow');
     currentBet = 0;
@@ -70,7 +74,7 @@ function startGame() {
     handButtons.classList.add('hidden');
     runningCount.classList.add('flex');
 
-    betArea.classList.remove('invisible');
+    betArea.classList.remove('hidden');
     chipSection.classList.remove('hidden');
     btnBet.classList.remove('invisible');
     btnClear.classList.remove('invisible');
