@@ -76,7 +76,7 @@ function startGame() {
 
     betArea.classList.remove('hidden');
     chipSection.classList.remove('hidden');
-    btnBet.classList.remove('invisible');
+    btnBet.disabled = false;
     btnClear.classList.remove('invisible');
     btnAllin.classList.remove('hidden');
     runningCount.classList.remove('hidden');
@@ -180,7 +180,7 @@ function startHand(){
     btnInsurance.disabled = true;
     
     chipSection.classList.add('hidden');
-    btnBet.classList.add('invisible');
+    btnBet.disabled = true;
     btnClear.classList.add('invisible');
     btnAllin.classList.add('hidden');
     

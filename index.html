@@ -11,27 +11,33 @@
 
 <body class="bg-gray-900 flex flex-col">
 
-    <section class="flex items-center lg:justify-start justify-center order-2 lg:order-1 lg:h-auto h-56">
+    <section class="order-2 flex h-64 items-center justify-center lg:order-1 lg:h-auto lg:justify-start">
         <div id="startSection" class="lg:flex flex h-32 flex-col gap-3 px-3 justify-center lg:items-start w-full lg:w-auto 2xl:px-10">
-            <h1 class="lg:text-4xl text-5xl  text-white font-extrabold text-center italic">Blackjack<span class="text-[#F0DB4F] not-italic">JS</span> </h1>
+            <h1 class="text-center text-5xl font-extrabold italic text-white lg:text-4xl ">Blackjack<span class="text-[#F0DB4F] not-italic">JS</span> </h1>
             <button id="btnStart" class="rounded-md bg-green-800 px-6 py-3 text-white">Start Game</button>
         </div>
 
-        <section class="lg:flex lg:w-full">
-            <div id="betArea" class="text-white px-3 lg:border-slate-800 lg:border-l-4 w-full h-32 flex-col justify-center hidden">
-                <h2 id="h2text" class="absolute top-0.5 italic font-semibold text-sm text-gray-600">Place your bet</h2>
-                <div class="flex flex-row w-full h-full items-center justify-center gap-5">
+        <section class="flex flex-col justify-between lg:h-auto lg:w-full lg:flex-row lg:justify-normal">
 
-                    <div id="controls" class="flex xl:min-w-[550px] lg:min-w-[12rem] lg:pt-2.5 ml-5 h-full items-center">
-                        <div id="chips" class="flex-wrap flex justify-between w-full 2xl:gap-2">
-                            <button data-value="1" class="chip border-white bg-gray-500 hover:opacity-85 active:scale-95">$1</button>
-                            <button data-value="5"  class="chip border-white bg-red-800 hover:opacity-85 active:scale-95">$5</button>
-                            <button data-value="25"  class="chip border-white bg-green-800 hover:opacity-85 active:scale-95">$25</button>
-                            <button data-value="50"  class="chip border-white bg-blue-900 hover:opacity-85 active:scale-95">$50</button>
-                            <button data-value="100"  class="chip border-white bg-gray-800 hover:opacity-85 active:scale-95">$100</button>
-                            <button data-value="500"  class="chip border-white bg-purple-900 hover:opacity-85 active:scale-95">$500</button>
-                            <button data-value="1000"  class="chip border-white bg-orange-700 hover:opacity-85 active:scale-95">$1000</button>
-                            <button data-value="5000"  class="chip border-black bg-slate-300 text-black hover:opacity-85 active:scale-95">$5000</button>
+            <!-- Father Container for chips and betting controls -->
+            <div id="betArea" class="mb-2 hidden justify-center border-b-2 border-slate-800 pb-2 text-white lg:mb-0 lg:h-32 lg:w-full lg:border-b-0 lg:border-l-4 lg:border-slate-800 lg:px-3 lg:pb-0">
+                <h2 id="h2text" class="absolute bottom-60 text-xs font-semibold italic text-gray-600 lg:top-0.5 lg:text-sm">Place your bet</h2>
+
+                <!-- Children Container for chips and betting controls -->
+                <div class="flex h-full w-full flex-col items-center justify-center gap-3 lg:flex-row lg:gap-5">
+
+                    <div id="controls" class="flex h-full w-full items-center lg:ml-5 lg:min-w-[12rem] lg:pt-2.5 xl:min-w-[550px]">
+
+                        <!-- Container for casino chips and hand buttons -->
+                        <div id="chips" class="flex w-full flex-nowrap lg:flex-wrap lg:justify-between 2xl:gap-2">
+                            <button data-value="1" class="chip border-white bg-gray-500 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-gray-500">$1</button>
+                            <button data-value="5"  class="chip border-white bg-red-800 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-red-800">$5</button>
+                            <button data-value="25"  class="chip border-white bg-green-800 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-green-800">$25</button>
+                            <button data-value="50"  class="chip border-white bg-blue-900 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-blue-900">$50</button>
+                            <button data-value="100"  class="chip border-white bg-gray-800 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-gray-800">$100</button>
+                            <button data-value="500"  class="chip border-white bg-purple-900 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-purple-900">$500</button>
+                            <button data-value="1000"  class="chip border-white bg-orange-700 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-orange-700">$1000</button>
+                            <button data-value="5000"  class="chip border-black bg-slate-300 text-black transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-slate-300">$5000</button>
                         </div>
                         <div id="handButtons" class="hidden justify-evenly items-center h-full w-full 2xl:gap-5">
                             <button id="btnHit" title="Take a card" class="h-12 w-28 2xl:w-32 flex items-center justify-center rounded-md bg-blue-800 text-white hover:bg-blue-700 disabled:hover:bg-blue-800 active:scale-95 transition-transform duration-75">
@@ -79,27 +85,28 @@
                         </div>
                     </div>
                     
-                    <section class="flex items-center flex-col lg:flex-row">
-                        <div id="currentBet" class="flex flex-col items-center min-w-28 bg-slate-800 rounded-md h-fit">
-                            <div class="font-medium text-green-500 flex items-center justify-between min-w-full px-2 pt-1">
+                    <!-- Container for current bet and deal button -->
+                    <section class="flex flex-row items-center gap-2">
+                        <div id="currentBet" class="flex min-w-36 flex-col items-center rounded-md bg-slate-800 lg:h-fit lg:min-w-28">
+                            <div class="flex min-w-full items-center justify-between px-2 py-0.5 font-medium text-green-500 lg:py-0 lg:pt-1">
                                 <p class="text-center">$<span id="balance">1000</span></p>
-                                <button id="btnResetMoney" title="Reset money" class="hidden">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 cursor-pointer hover:text-white transition-colors">
+                                <button id="btnResetMoney" title="Reset money" class="hidden size-6 transition active:bg-blue-600 lg:size-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="lg:size-5 lg:cursor-pointer lg:hover:text-white lg:transition-colors">
                                         <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
-                                <button id="btnAllin" title="All-in" >
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 cursor-pointer ml-1 hover:text-white transition-colors">
+                                <button id="btnAllin" title="All-in" class="size-6 active:bg-blue-600 transition lg:size-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="lg:size-5 lg:cursor-pointer lg:ml-1 lg:hover:text-white lg:transition-colors">
                                         <path fill-rule="evenodd" d="M10 1c3.866 0 7 1.79 7 4s-3.134 4-7 4-7-1.79-7-4 3.134-4 7-4Zm5.694 8.13c.464-.264.91-.583 1.306-.952V10c0 2.21-3.134 4-7 4s-7-1.79-7-4V8.178c.396.37.842.688 1.306.953C5.838 10.006 7.854 10.5 10 10.5s4.162-.494 5.694-1.37ZM3 13.179V15c0 2.21 3.134 4 7 4s7-1.79 7-4v-1.822c-.396.37-.842.688-1.306.953-1.532.875-3.548 1.369-5.694 1.369s-4.162-.494-5.694-1.37A7.009 7.009 0 0 1 3 13.179Z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
                             </div>
 
-                            <span class="text-sm mt-1 mb-0.5 text-center">Current Bet</span>
-                            <div class="bg-black text-center w-full justify-between font-medium flex items-center h-7 px-2 rounded-b-md">
+                            <span class="text-center text-xs lg:text-sm lg:mb-0.5 lg:mt-1">Current Bet</span>
+                            <div class="flex w-full items-center justify-between rounded-b-md bg-black px-2 py-0.5 text-center font-medium lg:h-7 lg:py-0">
                                 <span class="">$<span id="totalBet" ></span></span>
-                                <button id="btnClear" title="Clear bet">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 cursor-pointer transition-colors text-slate-700 hover:text-white">
+                                <button id="btnClear" title="Clear bet" class="size-6 active:bg-blue-600 transition lg:size-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="lg:size-5 lg:cursor-pointer lg:transition-colors text-slate-700 lg:hover:text-white">
                                         <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clipRule="evenodd" />
                                     </svg>
                                 </button>
@@ -107,31 +114,30 @@
 
                         </div>
                         <div>
-                            <button id="btnBet" class="flex h-10 w-24 items-center justify-center rounded-md bg-green-800 text-white transition-transform duration-75 hover:bg-green-700 active:scale-95">
-                                <span class="font-medium text-center w-full border-r-2 h-full flex justify-center items-center">Deal</span>
+                            <button id="btnBet" class="flex h-10 w-24 active:text-blue-200 items-center justify-center rounded-md bg-green-800 text-white lg:transition-transform lg:duration-75 lg:hover:bg-green-700 lg:active:scale-95">
+                                <span class="font-medium text-center w-full active:border-r-blue-200 border-r-2 h-full flex justify-center items-center">Deal</span>
                                 <div class="h-6 w-6 aspect-square ml-[.15rem] mr-0.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/>
                                         <ellipse cx="96" cy="84" rx="80" ry="36" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
                                         <path d="M16,84v40c0,19.88,35.82,36,80,36s80-16.12,80-36V84" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="64" y1="117" x2="64" y2="157" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M176,96.72c36.52,3.34,64,17.86,64,35.28,0,19.88-35.82,36-80,36-19.6,0-37.56-3.17-51.47-8.44" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M80,159.28V172c0,19.88,35.82,36,80,36s80-16.12,80-36V132" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="192" y1="165" x2="192" y2="205" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="117" x2="128" y2="205" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
                                     </svg>
                                 </div>
-                                
                             </button>
                         </div>
                     </section>
                 </div>
             </div>
 
-            
-            <div id="runningCount" class="hidden border-slate-800 justify-center lg:border-l-4 xl:max-w-80 lg:bg-orange-300 lg:max-w-52 w-full lg:h-32 flex-col px-3">
-                <h2 id="" class="absolute top-0.5 italic font-semibold text-sm text-gray-600">Running Count</h2>
+            <!-- Container for counting cards -->
+            <div id="runningCount" class="hidden w-full flex-col justify-center py-0 pt-2 lg:mt-0 lg:h-32 lg:max-w-52 lg:border-l-4 lg:border-slate-800 lg:px-3 xl:max-w-80">
+                <h2 id="" class="absolute bottom-20 text-xs font-semibold italic text-gray-600 lg:top-0.5 lg:text-sm">Running Count</h2>
                 
                 <div class="flex flex-col items-center">
-                    <h3 id="totalCounter" class="font-bold text-slate-400 text-base lg:py-1">Total Cards: </h3>
-                    <h4 id="givenCounter" class="font-medium text-gray-300 bg-slate-800 w-7/12 text-center lg:py-0.5 rounded-lg mb-1">
+                    <h3 id="totalCounter" class="text-sm font-bold text-slate-400 lg:py-1 lg:text-base">Total Cards: </h3>
+                    <h4 id="givenCounter" class="mb-1 w-7/12 rounded-lg bg-slate-800 text-center text-sm font-medium text-gray-300 lg:py-0.5 lg:text-base">
                         Cards given: <span class="text-blue-400 font-bold">0</span>
                     </h4>
-                    <h4 id="remainingCounter"class="font-medium text-gray-300 bg-slate-800 w-7/12 text-center lg:py-0.5 rounded-lg">
+                    <h4 id="remainingCounter"class="w-7/12 rounded-lg bg-slate-800 text-center text-sm font-medium text-gray-300 lg:py-0.5 lg:text-base">
                         Remaining: <span class="text-green-400 font-bold">0</span>
                     </h4>
                 </div>
@@ -139,7 +145,7 @@
         </section>
     </section>
 
-    <section id="gameBoard" class="flex lg:h-[calc(100vh-128px)] h-[calc(100vh-224px)]  w-full order-1 lg:order-2 flex-col justify-center">
+    <section id="gameBoard" class="order-1 flex h-[calc(100dvh-256px)] w-full flex-col justify-center lg:order-2 lg:h-[calc(100vh-128px)]">
         <div class="relative h-full bg-orange-900/40">
             <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-6xl md:text-[10rem] 2xl:text-[200px] font-bold uppercase tracking-widest">
                 Dealer
