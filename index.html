@@ -26,10 +26,10 @@
                 <!-- Children Container for chips and betting controls -->
                 <div class="flex h-full w-full flex-col items-center justify-center gap-3 lg:flex-row lg:gap-5">
 
-                    <div id="controls" class="flex h-full w-full items-center lg:ml-5 lg:min-w-[12rem] lg:pt-2.5 xl:min-w-[550px]">
+                    <div id="controls" class="flex h-full w-full items-center lg:min-w-[12rem] lg:pt-2.5 2xl:max-w-[800px]">
 
                         <!-- Container for casino chips and hand buttons -->
-                        <div id="chips" class="flex min-h-12 w-full flex-nowrap justify-between lg:flex-wrap 2xl:gap-2">
+                        <div id="chips" class="flex min-h-12 w-full flex-nowrap justify-evenly lg:flex-wrap 2xl:gap-0">
                             <button data-value="1" class="chip border-white bg-gray-500 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-gray-500">$1</button>
                             <button data-value="5"  class="chip border-white bg-red-800 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-red-800">$5</button>
                             <button data-value="25"  class="chip border-white bg-green-800 transition active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:scale-95 lg:active:bg-green-800">$25</button>
@@ -152,8 +152,8 @@
             </div>
 
             <div class="flex h-full flex-col items-center justify-center">
-                <div id="dealerScore" class="invisible xl:h-6 2xl:h-7 md:text-base font-medium text-white 2xl:text-xl"></div>
-                <div id="dealerShow" class="h-[140px] xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
+                <div id="dealerScore" class="text-base font-medium text-white 2xl:text-xl"></div>
+                <div id="dealerShow" class="flex h-auto flex-wrap justify-center xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
         <div class="relative h-full bg-green-900/40">
@@ -162,7 +162,7 @@
             </div>
             <div class="flex h-full flex-col items-center justify-center">
                 <div id="playerScore" class="text-base font-medium text-white 2xl:text-xl"></div>
-                <div id="playerShow" class="h-[140px] xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
+                <div id="playerShow" class="flex h-auto flex-wrap justify-center xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
     </section>
