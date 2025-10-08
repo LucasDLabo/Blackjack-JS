@@ -1,5 +1,3 @@
-const gameBoard = document.getElementById('gameBoard');
-
 const controls = document.getElementById('controls');
 const handButtons = document.getElementById('handButtons');
 
