@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-900 flex flex-col">
+<body class="bg-gray-900 flex flex-col overflow-x-hidden overflow-y-hidden">
 
     <section class="order-2 flex h-64 items-center justify-centerlg:order-1 lg:h-auto lg:justify-start">
         <div id="startSection" class="flex h-32 min-w-full flex-col justify-center gap-3 px-3 lg:min-w-min lg:flex lg:w-auto lg:items-start 2xl:px-10">
@@ -153,7 +153,7 @@
 
             <div class="flex h-full flex-col items-center justify-center">
                 <div id="dealerScore" class="text-xs font-medium text-white 2xl:text-xl"></div>
-                <div id="dealerShow" class="flex h-auto flex-wrap justify-center xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
+                <div id="dealerShow" class="flex h-auto w-full justify-center xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
         <div class="relative h-full bg-green-900/40">
@@ -162,13 +162,13 @@
             </div>
             <div class="flex h-full flex-col items-center justify-center">
                 <div id="playerScore" class="text-xs xs:text-base font-medium text-white 2xl:text-xl"></div>
-                <div id="playerShow" class="flex h-auto flex-wrap justify-center xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
+                <div id="playerShow" class="flex h-auto w-full justify-center xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
     </section>
 
     <div id="resultModal" class="fixed inset-0 flex items-center justify-center bg-black/50 invisible">
-        <div class="bg-neutral-200 rounded-lg shadow-lg p-6 max-w-60 min-w-60 2xl:max-w-72 2xl:min-w-72 text-wrap text-center">
+        <div class="min-w-60 max-w-60 text-wrap rounded-lg bg-neutral-200 p-6 text-center shadow-lg 2xl:min-w-72 2xl:max-w-72">
             <h3 id="resultTitle">Resultado</h3>
             <p id="resultMessage" class="text-lg mb-2 2xl:text-xl">Comentario</p>
             <p id="resultAmount"></p>

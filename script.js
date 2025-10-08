@@ -440,6 +440,18 @@ function renderHand(hand, elementId) {
         cardDiv.appendChild(bottomRight);
 
         container.appendChild(cardDiv);
+
+        if (window.innerWidth > 768) continue; // Only for small screens
+        if (elementId === 'playerShow') {
+            // Keeps the player scale if dealer hand has more cards
+            cardDiv.style.zoom = currentPlayerCardScale;
+            cardDiv.style.marginRight = `${5 * currentPlayerCardScale}px`;
+        } else {
+            cardDiv.style.zoom = currentDealerCardScale;
+            cardDiv.style.marginRight = `${5 * currentDealerCardScale}px`;
+        }
+        cardDiv.style.marginTop = "0px"
+        cardDiv.style.transformOrigin = 'center';
     }
 }
 
@@ -518,6 +530,8 @@ function updatePlayerHand() {
     //renderHand(playerHand, 'playerShow');
 
     playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
+
+    adjustCardScale('playerShow');
 }
 
 function updateDealerHand() {
@@ -528,9 +542,47 @@ function updateDealerHand() {
     //renderHand(dealerHand, 'dealerShow');
 
     dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
+
+    adjustCardScale('dealerShow');
+}
+let currentPlayerCardScale = 1;
+let currentDealerCardScale = 1;
+function adjustCardScale(containerId) {
+
+    // Only for small screens
+    if (window.innerWidth > 768) return; 
+
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.card');
+    if (cards.length === 0) return;
+
+    const maxWidth = container.offsetWidth;
+    const totalWidth = cards.length * 85; // Estimating each card width + margin
+    console.log(`Total card width: ${totalWidth}px, Container width: ${maxWidth}px`);
+    const scale = totalWidth > maxWidth ? maxWidth / totalWidth : 1;
+    console.log(`Scale factor: ${scale}`);
+
+    if (totalWidth > maxWidth) {
+        cards.forEach(card => {
+            card.style.zoom = scale;
+            card.style.marginRight = `${5 * scale}px`;
+            card.style.marginTop = "0px"
+            card.style.transformOrigin = 'center';
+        });
+        if (containerId === 'playerShow') {
+            currentPlayerCardScale = scale;
+        } else {
+            currentDealerCardScale = scale;
+        }
+    }
+    
 }
 
+
 function renderSingleCard(card, elementId, animate = false) {
+    console.log("Rendering single card:", card);
     const container = document.getElementById(elementId);
 
     const cardDiv = document.createElement('div');
