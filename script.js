@@ -167,7 +167,7 @@ function startHand(){
     }
 
     if (currentBet == 0) {
-        // alert("Introduzca una apuesta");
+        // alert("Enter bet amount");
         return;
     }
     
@@ -198,7 +198,6 @@ function startHand(){
     playerHand = [giveCard(), giveCard()];
     dealerHand = [giveCard()];
     
-    // updatePlayerHand();
     renderPlayerInitialHand() 
     renderDealerInitialHand() 
 
@@ -208,7 +207,6 @@ function startHand(){
 
     if (calculateHandValue(playerHand) === 21 && playerHand.length === 2) {
         const playerHasBlackjack = true;
-        // handButtons.classList.add('hidden');
 
         btnHit.disabled = true;
         btnStand.disabled = true;
@@ -244,9 +242,6 @@ function hit() {
 btnStand.addEventListener('click', stand);
 async function stand(playerHasBlackjack) {
     // Dealer plays...
-    // while (calculateHandValue(dealerHand) < 17) {
-    //     dealerHand.push(giveCard());
-    // }
 
     btnHit.disabled = true;
     btnStand.disabled = true;
@@ -520,14 +515,9 @@ function updateScreen() {
 }
 
 function updatePlayerHand() {
-    // renderHand(playerHand, 'playerShow');
-
-    // playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
-
     const newCard = playerHand[playerHand.length - 1]
-    // console.log(newCard);
+    
     renderSingleCard(newCard, 'playerShow', true);
-    //renderHand(playerHand, 'playerShow');
 
     playerScore.innerHTML = `Hand value: ${calculateHandValue(playerHand)}`;
 
@@ -537,9 +527,7 @@ function updatePlayerHand() {
 function updateDealerHand() {
 
     const newCard = dealerHand[dealerHand.length - 1]
-    //console.log(newCard);
     renderSingleCard(newCard, 'dealerShow', true);
-    //renderHand(dealerHand, 'dealerShow');
 
     dealerScore.innerHTML = `Hand value: ${calculateHandValue(dealerHand)}`;
 
