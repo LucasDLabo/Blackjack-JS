@@ -344,7 +344,7 @@ function double() {
 let insuranceBet = 0;
 btnInsurance.addEventListener('click', insurance);
 function insurance() {
-    const maxInsurance = currentBet / 2;
+    const maxInsurance = Math.ceil(currentBet / 2);
 
     btnHit.disabled = true;
     btnStand.disabled = true;
@@ -364,12 +364,12 @@ function insurance() {
     dealerHand.push(giveCard());
 
     if (calculateHandValue(dealerHand) == 21) {
-        balance += insuranceBet * 3;
-        //updateScreen();
+        balance += Math.ceil(insuranceBet * 3);
+        
         updateDealerHand();
         
         setTimeout(() => {
-            showResult('insurance', Math.floor(insuranceBet * 3), "Dealer has Blackjack.");
+            showResult('insurance', Math.ceil(insuranceBet * 3), "Dealer has Blackjack.");
             updateBalance();
             disableActions();
         }, 1000);
@@ -380,7 +380,9 @@ function insurance() {
             showResult('lose', maxInsurance, "Dealer doesn't have Blackjack.");
             btnHit.disabled = false;
             btnStand.disabled = false;
-            btnDouble.disabled = false;
+            
+            balance < currentBet ? btnDouble.disabled = true : btnDouble.disabled = false;
+
             isInsuranceCardGenerated = true;
         }, 500);
 
