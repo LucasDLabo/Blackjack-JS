@@ -244,6 +244,7 @@ async function stand(playerHasBlackjack) {
     btnHit.disabled = true;
     btnStand.disabled = true;
     btnDouble.disabled = true;
+    btnInsurance.disabled = true;
 
     // player has blackjack?
     if (playerHasBlackjack === true) {
