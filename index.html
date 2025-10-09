@@ -56,13 +56,13 @@
                                     </svg>
                                 </div>
                             </button>
-                            <button id="btnDouble" title="Double your bet and take one more card" class="flex h-10 w-20 transform items-center justify-center rounded-md bg-green-900 text-white transition-transform duration-75 active:scale-90 active:bg-green-700 lg:h-12 lg:w-28 lg:duration-0 lg:hover:bg-green-800 lg:active:scale-95 lg:disabled:hover:bg-green-900 2xl:w-32">
+                            <button id="btnDouble" title="Double your bet and take one more card" class="flex h-10 w-20 transform items-center justify-center rounded-md bg-green-900 text-white transition-transform duration-75 active:scale-90 active:bg-green-700 disabled:active:bg-green-900 lg:h-12 lg:w-28 lg:duration-0 lg:hover:bg-green-800 lg:active:scale-95 lg:disabled:hover:bg-green-900 2xl:w-32">
                                 <span class="flex h-full w-full items-center justify-center border-r-2 text-center text-xs font-medium lg:text-base">Double</span>
                                 <div class="aspect-square h-6 w-6 2xl:h-8 2xl:w-8">
                                     <span class="font-bold text-sm lg:text-base 2xl:text-xl">x2</span>
                                 </div>
                             </button>
-                            <button id="btnInsurance" title="Protect your bet if dealer has blackjack" class="flex h-10 w-20 transform items-center justify-center rounded-md bg-cyan-600 text-white transition-transform duration-75 active:scale-90 active:bg-cyan-500 lg:h-12 lg:w-28 lg:duration-0 lg:hover:bg-cyan-500 lg:active:scale-95 lg:disabled:hover:bg-cyan-600 2xl:w-32">
+                            <button id="btnInsurance" title="Protect your bet if dealer has blackjack" class="flex h-10 w-20 transform items-center justify-center rounded-md bg-cyan-600 text-white transition-transform duration-75 active:scale-90 active:bg-cyan-500 disabled:active:bg-cyan-600 lg:h-12 lg:w-28 lg:duration-0 lg:hover:bg-cyan-500 lg:active:scale-95 lg:disabled:hover:bg-cyan-600 2xl:w-32">
                                 <span class="flex h-full w-full items-center justify-center border-r-2 text-center text-xs font-medium lg:text-base">Insurance</span>
                                 <div class="aspect-square h-5 w-5 lg:h-6 lg:w-6 2xl:h-8 2xl:w-8">
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@
                         <div id="currentBet" class="flex min-w-36 flex-col items-center rounded-md border-[1px] border-slate-800 bg-slate-800 lg:h-fit lg:min-w-32">
                             <div class="flex min-w-full items-center justify-between px-1 py-0.5 font-medium text-green-500 lg:py-0 lg:pt-1">
                                 <span id="labelAllIn" class="pointer-events-none absolute translate-x-[5rem] text-center text-xs text-white lg:translate-x-[4.5rem] lg:text-[0.6rem] lg:font-bold">All-in</span>
-                                <p class="text-center">$<span id="balance">1000</span></p>
+                                <p id="textBalance" class="text-center">$<span id="balance">1000</span></p>
                                 <button id="btnResetMoney" title="Reset money" class="hidden size-6 transition active:bg-blue-600 lg:size-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="lg:size-5 lg:cursor-pointer lg:hover:text-white lg:transition-colors">
                                         <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />

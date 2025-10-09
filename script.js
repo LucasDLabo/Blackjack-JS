@@ -14,6 +14,7 @@ const btnResetMoney = document.getElementById('btnResetMoney');
 const btnAllin = document.getElementById('btnAllin');
 const labelAllIn = document.getElementById('labelAllIn');
 const labelClear = document.getElementById('labelClear');
+const textBalance = document.getElementById('textBalance');
 
 let playerHand = [];
 let dealerHand = [];
@@ -79,6 +80,7 @@ function startGame() {
     btnAllin.disabled = false;
     labelAllIn.classList.remove('opacity-20');
     labelClear.classList.remove('opacity-20');
+    textBalance.classList.remove('opacity-20');
     runningCount.classList.remove('hidden');
     
     // Changes All-in button to reset money if balance is 0
@@ -88,6 +90,7 @@ function startGame() {
         btnAllin.classList.add('hidden');
     }
     updateBalance();
+    updateTextBalance();
     
     if (isDeckLow == true) {
         createDeck(2);
@@ -112,6 +115,7 @@ chipButtons.forEach(chip => {
             currentBet += value;
             balance -= value;
             updateBalance();
+            updateTextBalance();
             if (currentBet !== 0) {
                 btnBet.disabled = false;
             } else {
@@ -125,14 +129,18 @@ function updateBalance() {
     Math.floor(currentBet);
     balanceString = balance
     currentBetString = currentBet
+    console.log(`Balance: ${balanceString}, Current Bet: ${currentBetString}`);
+}
+function updateTextBalance() {
     balanceDisplay.textContent = balanceString.toLocaleString();
     totalBet.textContent = currentBetString.toLocaleString();
-
 }
+
 btnResetMoney.addEventListener('click', resetMoney);
 function resetMoney() {
     balance = 1000;
     updateBalance();
+    updateTextBalance();
     btnResetMoney.classList.add('hidden');
     btnAllin.classList.remove('hidden');
     labelAllIn.textContent = "All-in";
@@ -145,6 +153,7 @@ function allin() {
     currentBet = balance;
     balance -=  currentBet;
     updateBalance();
+    updateTextBalance();
     btnBet.disabled = false;
 }
 
@@ -154,6 +163,7 @@ function clearBet() {
     balance += currentBet;
     currentBet = 0;
     updateBalance();
+    updateTextBalance();
     btnBet.disabled = true;
 }
 
@@ -194,6 +204,7 @@ function startHand(){
     btnAllin.disabled = true;
     labelAllIn.classList.add('opacity-20');
     labelClear.classList.add('opacity-20');
+    textBalance.classList.add('opacity-20');
     
     handButtons.classList.remove('hidden');
     playerScore.classList.remove('invisible');
@@ -204,6 +215,7 @@ function startHand(){
     handButtons.classList.add('flex');
 
     updateBalance();
+    updateTextBalance();
     dealerHand = [];
 
     playerHand = [giveCard(), giveCard()];
@@ -333,6 +345,7 @@ function double() {
     balance -= currentBet;
     currentBet *= 2;
     updateBalance();
+    updateTextBalance();
 
     playerHand.push(giveCard());
     updatePlayerHand();
@@ -372,6 +385,7 @@ function insurance() {
     insuranceBet = maxInsurance;
     balance -= maxInsurance;
     updateBalance();
+    updateTextBalance();
 
     btnInsurance.disabled = true;
     givenCards -= 1;
@@ -383,8 +397,8 @@ function insurance() {
         updateDealerHand();
         
         setTimeout(() => {
-            showResult('insurance', Math.ceil(insuranceBet * 3), "Dealer has Blackjack.");
             updateBalance();
+            showResult('insurance', Math.ceil(insuranceBet * 3), "Dealer has Blackjack.");
             disableActions();
         }, 1000);
         
@@ -584,7 +598,6 @@ function adjustCardScale(containerId) {
 
 
 function renderSingleCard(card, elementId, animate = false) {
-    console.log("Rendering single card:", card);
     const container = document.getElementById(elementId);
 
     const cardDiv = document.createElement('div');
@@ -736,6 +749,8 @@ function showResult(result, amount, comment) {
 
 closeResult.addEventListener('click', () => {
     resultModal.classList.add('invisible');
+    textBalance.classList.remove('opacity-20');
+    updateTextBalance();
 });
 
 
