@@ -88,7 +88,8 @@
                     <!-- Container for current bet and deal button -->
                     <section class="flex flex-row items-center gap-2">
                         <div id="currentBet" class="flex min-w-36 flex-col items-center rounded-md border-[1px] border-slate-800 bg-slate-800 lg:h-fit lg:min-w-28">
-                            <div class="flex min-w-full items-center justify-between px-2 py-0.5 font-medium text-green-500 lg:py-0 lg:pt-1">
+                            <div class="flex min-w-full items-center justify-between px-1 py-0.5 font-medium text-green-500 lg:py-0 lg:pt-1">
+                                <span class="pointer-events-none absolute translate-x-[5rem] text-center text-xs text-white lg:translate-x-14 lg:text-[0.6rem] lg:font-bold">All-in</span>
                                 <p class="text-center">$<span id="balance">1000</span></p>
                                 <button id="btnResetMoney" title="Reset money" class="hidden size-6 transition active:bg-blue-600 lg:size-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="lg:size-5 lg:cursor-pointer lg:hover:text-white lg:transition-colors">
@@ -105,7 +106,8 @@
                             <div class="flex w-full items-center justify-center border-b-[1px] border-yellow-300 bg-slate-900 py-0.5 text-center">
                                 <span class="text-center text-xs font-medium text-yellow-300">Current Bet</span>
                             </div>
-                            <div class="flex w-full items-center justify-between rounded-b-md bg-slate-900 px-2 py-0.5 text-center font-medium lg:h-7 lg:py-0">
+                            <div class="flex w-full items-center justify-between rounded-b-md bg-slate-900 px-1 py-0.5 text-center font-medium lg:h-7 lg:py-0">
+                                <span class="pointer-events-none absolute translate-x-[5rem] text-center text-xs text-white lg:translate-x-[3.6rem] lg:text-[0.6rem] lg:font-bold">Clear</span>
                                 <span class="text-yellow-300">$<span id="totalBet" ></span></span>
                                 <button id="btnClear" title="Clear bet" class="size-6 transition active:bg-blue-600 lg:size-auto lg:transform lg:cursor-pointer lg:transition-none lg:active:scale-75 lg:active:bg-transparent">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="lg:size-5 lg:transition-colors text-slate-700 lg:hover:text-white">
