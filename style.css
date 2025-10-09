@@ -115,8 +115,8 @@ html, body {
         font-size: 25px;
     }
     .chip{
-        width: 5rem;
-        font-size: large;
+        width: 4.5rem;
+        font-size: larger;
     }
 }
 @media (max-width: 1024px) {
