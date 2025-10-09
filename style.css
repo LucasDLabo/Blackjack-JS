@@ -105,7 +105,7 @@ html, body {
         font-size: 25px;
     }
     .card .top-left{
-        left: -55px;
+        left: -52px;
         font-size: 25px;
     }
     .card .center{
@@ -115,7 +115,7 @@ html, body {
     }
     .card .bottom-right{
         position: relative;
-        right: -55px;
+        right: -52px;
         font-size: 25px;
     }
     .chip{
