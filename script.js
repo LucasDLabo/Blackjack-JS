@@ -56,8 +56,6 @@ const btnStart = document.getElementById('btnStart');
 btnStart.addEventListener('click', startGame);
 
 function startGame() {
-    console.clear();
-
     const startSection = document.getElementById('startSection');
     startSection.classList.add("hidden"); 
 
@@ -76,7 +74,7 @@ function startGame() {
 
     betArea.classList.remove('hidden');
     chipSection.classList.remove('hidden');
-    btnBet.disabled = false;
+    btnBet.disabled = true;
     btnClear.disabled = false;
     btnAllin.disabled = false;
     labelAllIn.classList.remove('opacity-20');
@@ -114,6 +112,11 @@ chipButtons.forEach(chip => {
             currentBet += value;
             balance -= value;
             updateBalance();
+            if (currentBet !== 0) {
+                btnBet.disabled = false;
+            } else {
+                btnBet.disabled = true;
+            }
         } 
     });
 });
@@ -142,6 +145,7 @@ function allin() {
     currentBet = balance;
     balance -=  currentBet;
     updateBalance();
+    btnBet.disabled = false;
 }
 
 const btnClear = document.getElementById('btnClear');
@@ -150,6 +154,7 @@ function clearBet() {
     balance += currentBet;
     currentBet = 0;
     updateBalance();
+    btnBet.disabled = true;
 }
 
 const h2text = document.getElementById('h2text');
