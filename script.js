@@ -57,6 +57,7 @@ const btnStart = document.getElementById('btnStart');
 btnStart.addEventListener('click', startGame);
 
 function startGame() {
+    updateChipStates();
     const startSection = document.getElementById('startSection');
     startSection.classList.add("hidden"); 
 
@@ -110,26 +111,35 @@ function startGame() {
 const chipButtons = document.querySelectorAll('.chip');
 chipButtons.forEach(chip => {
     chip.addEventListener('click', () => {
-            const value = parseInt(chip.dataset.value);
-            if (balance >= value) {
-            currentBet += value;
-            balance -= value;
-            updateBalance();
-            updateTextBalance();
-            if (currentBet !== 0) {
-                btnBet.disabled = false;
-            } else {
-                btnBet.disabled = true;
-            }
-        } 
+        const value = parseInt(chip.dataset.value);
+        if (balance < value) return;
+
+        currentBet += value;
+        balance -= value;
+
+        updateBalance();
+        updateTextBalance();
+        btnBet.disabled = currentBet === 0;
+
+        updateChipStates();
     });
 });
+
+updateChipStates();
+
+function updateChipStates() {
+    chipButtons.forEach(chip => {
+        const value = parseInt(chip.dataset.value);
+        const isDisabled = value > balance;
+        chip.classList.toggle('opacity-30', isDisabled);
+        chip.disabled = isDisabled;
+    });
+}
 
 function updateBalance() {
     Math.floor(currentBet);
     balanceString = balance
     currentBetString = currentBet
-    console.log(`Balance: ${balanceString}, Current Bet: ${currentBetString}`);
 }
 function updateTextBalance() {
     balanceDisplay.textContent = balanceString.toLocaleString();
@@ -141,6 +151,7 @@ function resetMoney() {
     balance = 1000;
     updateBalance();
     updateTextBalance();
+    updateChipStates();
     btnResetMoney.classList.add('hidden');
     btnAllin.classList.remove('hidden');
     labelAllIn.textContent = "All-in";
@@ -155,6 +166,7 @@ function allin() {
     updateBalance();
     updateTextBalance();
     btnBet.disabled = false;
+    updateChipStates();
 }
 
 const btnClear = document.getElementById('btnClear');
@@ -165,6 +177,7 @@ function clearBet() {
     updateBalance();
     updateTextBalance();
     btnBet.disabled = true;
+    updateChipStates();
 }
 
 const h2text = document.getElementById('h2text');
