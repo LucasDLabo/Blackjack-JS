@@ -762,7 +762,7 @@ function disableActions() {
     btnInsurance.disabled = true;
     
     setTimeout(() => {
-        h2text.textContent = "";
+        h2text.textContent = "Play another hand";
         handButtons.classList.add('hidden');
         controls.classList.remove('justify-between');
         controls.classList.add('justify-center');
