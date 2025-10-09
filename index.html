@@ -11,12 +11,15 @@
 
 <body class="bg-gray-900 flex flex-col overflow-x-hidden overflow-y-hidden">
 
+    <!-- Upper section with controls -->
     <section class="order-2 flex h-64 items-center justify-centerlg:order-1 lg:h-auto lg:justify-start">
+        <!-- Game title -->
         <div id="startSection" class="flex h-32 min-w-full flex-col justify-center gap-3 px-3 lg:min-w-min lg:flex lg:w-auto lg:items-start 2xl:px-10">
             <h1 class="text-center text-5xl font-extrabold italic text-white lg:text-4xl ">Blackjack<span class="text-[#F0DB4F] not-italic">JS</span> </h1>
             <button id="btnStart" class="transform rounded-md bg-green-800 px-6 py-3 text-white transition-transform active:scale-90 active:bg-green-500 disabled:hover:bg-green-800 disabled:active:transform-none lg:transition-none lg:hover:bg-green-600">Start Game</button>
         </div>
 
+        <!-- Betting and counting section -->
         <section class="flex flex-col w-full px-3 justify-between lg:h-auto lg:w-full lg:flex-row lg:justify-normal">
 
             <!-- Father Container for chips and betting controls -->
@@ -39,6 +42,7 @@
                             <button data-value="1000"  class="chip transform border-white bg-orange-700 active:scale-90 active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:bg-orange-700">$1000</button>
                             <button data-value="5000"  class="chip transform border-black bg-slate-300 text-black active:scale-90 active:bg-blue-600 active:shadow-inner lg:hover:opacity-85 lg:active:bg-slate-300">$5000</button>
                         </div>
+                        <!-- Container for game buttons -->
                         <div id="handButtons" class="hidden h-full min-w-full min-h-12 justify-between flex-row-reverse items-center gap-4 lg:flex-row lg:justify-evenly lg:gap-0 2xl:gap-5">
                             <button id="btnHit" title="Take a card" class="flex h-10 w-20 transform items-center justify-center rounded-md bg-blue-800 text-white transition-transform duration-75 active:scale-90 active:bg-blue-500 lg:h-12 lg:w-28 lg:duration-0 lg:hover:bg-blue-700 lg:active:bg-blue-800 lg:disabled:hover:bg-blue-800 2xl:w-32">
                                 <span class="flex h-full w-full items-center justify-center border-r-2 text-center text-xs font-medium lg:text-base">Hit</span>
@@ -71,6 +75,7 @@
                                 </div>
                             </button>
                         </div>
+                        <!-- Container for next hand button -->
                         <div class="min-h-12 flex items-center">
                             <button id="btnNextHand" class="hidden h-10 w-24 items-center justify-center rounded-md bg-gray-700 text-white active:bg-gray-500 lg:active:bg-gray-700 lg:hover:bg-gray-600 active:scale-90 lg:h-12 lg:w-32">
                                 <span class="font-medium text-center text-xs w-full border-r-2 h-full flex justify-center items-center lg:text-base">Next Hand</span>
@@ -85,9 +90,11 @@
                         </div>
                     </div>
                     
-                    <!-- Container for current bet and deal button -->
+                    <!-- Section for current bet and deal button -->
                     <section class="flex flex-row items-center gap-2">
+                        <!-- Balance and bet container -->
                         <div id="currentBet" class="flex min-w-36 flex-col items-center rounded-md border-[1px] border-slate-800 bg-slate-800 lg:h-fit lg:min-w-32 xl:min-w-36">
+                            <!-- Current Balance -->
                             <div class="flex min-w-full items-center justify-between px-1 py-0.5 font-medium text-green-500 lg:py-0 lg:pt-1">
                                 <span id="labelAllIn" class="pointer-events-none absolute translate-x-[5rem] text-center text-xs text-white lg:translate-x-[4.5rem] lg:text-[0.6rem] lg:font-bold xl:text-sm">All-in</span>
                                 <p id="textBalance" class="text-center xl:text-lg">$<span id="balance">1000</span></p>
@@ -102,7 +109,7 @@
                                     </svg>
                                 </button>
                             </div>
-
+                            <!-- Current Bet -->
                             <div class="flex w-full items-center justify-center border-b-[1px] border-yellow-300 bg-slate-900 py-0.5 text-center">
                                 <span class="text-center text-xs font-medium text-yellow-300">Current Bet</span>
                             </div>
@@ -115,8 +122,8 @@
                                     </svg>
                                 </button>
                             </div>
-
                         </div>
+                        <!-- Deal button container -->
                         <div>
                             <button id="btnBet" class="flex h-10 w-24 transform items-center justify-center rounded-md bg-green-800 text-white active:scale-90 active:text-blue-200 disabled:transform-none disabled:hover:bg-green-800 disabled:active:text-white lg:hover:bg-green-700">
                                 <span class="flex h-full w-full items-center justify-center border-r-2 text-center font-medium active:border-r-blue-200">Deal</span>
@@ -149,17 +156,19 @@
         </section>
     </section>
 
+    <!-- Main game board section -->
     <section id="gameBoard" class="order-1 flex h-[calc(100dvh-256px)] w-full flex-col justify-center lg:order-2 lg:h-[calc(100vh-128px)]">
+        <!-- Dealer -->
         <div class="relative h-full bg-orange-900/40">
             <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-6xl md:text-[10rem] 2xl:text-[200px] font-bold uppercase tracking-widest">
                 Dealer
             </div>
-
             <div class="flex h-full flex-col items-center justify-center">
                 <div id="dealerScore" class="text-xs font-medium text-white 2xl:text-xl"></div>
                 <div id="dealerShow" class="flex h-auto w-full justify-center xl:mb-6 2xl:mb-7 2xl:h-[200px]"></div>
             </div>
         </div>
+        <!-- Player -->
         <div class="relative h-full bg-green-900/40">
             <div class="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 select-none text-center text-6xl md:text-[10rem] 2xl:text-[200px] font-bold uppercase tracking-widest">
                 You
@@ -171,6 +180,7 @@
         </div>
     </section>
 
+    <!-- Modal for showing results -->
     <div id="resultModal" class="fixed inset-0 flex items-center justify-center bg-black/50 invisible">
         <div class="min-w-60 max-w-60 text-wrap rounded-lg bg-neutral-200 p-6 text-center shadow-lg 2xl:min-w-72 2xl:max-w-72">
             <h3 id="resultTitle">Resultado</h3>
@@ -181,7 +191,9 @@
             </button>
         </div>
     </div>
+
     <script src="script.js"></script>
+
 </body>
 
 </html>
