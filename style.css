@@ -4,14 +4,6 @@
     font-weight: normal;
     font-style: normal;
 }
-#btnStart:disabled{
-    opacity: 0.2;
-    user-select: none;
-}
-#btnBet:disabled{
-    opacity: 0.2;
-    user-select: none;
-}
 html, body {
     width: 100%;
     max-width: 100%;
@@ -94,7 +86,14 @@ html, body {
 #handButtons button[disabled]:active{
     transform: none;
 }
-
+#btnStart:disabled{
+    opacity: 0.2;
+    user-select: none;
+}
+#btnBet:disabled{
+    opacity: 0.2;
+    user-select: none;
+}
 @media (min-width: 1536px) {
     .card{
         width: 140px;

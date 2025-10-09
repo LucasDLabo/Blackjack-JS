@@ -12,6 +12,8 @@ const dealerScore = document.getElementById('dealerScore');
 const betArea = document.getElementById('betArea');
 const btnResetMoney = document.getElementById('btnResetMoney');
 const btnAllin = document.getElementById('btnAllin');
+const labelAllIn = document.getElementById('labelAllIn');
+const labelClear = document.getElementById('labelClear');
 
 let playerHand = [];
 let dealerHand = [];
@@ -75,12 +77,16 @@ function startGame() {
     betArea.classList.remove('hidden');
     chipSection.classList.remove('hidden');
     btnBet.disabled = false;
-    btnClear.classList.remove('invisible');
-    btnAllin.classList.remove('hidden');
+    btnClear.disabled = false;
+    btnAllin.disabled = false;
+    labelAllIn.classList.remove('opacity-20');
+    labelClear.classList.remove('opacity-20');
     runningCount.classList.remove('hidden');
     
+    // Changes All-in button to reset money if balance is 0
     if (balance <= 0) {
         btnResetMoney.classList.remove('hidden');
+        labelAllIn.textContent = "Reset";
         btnAllin.classList.add('hidden');
     }
     updateBalance();
@@ -126,11 +132,11 @@ function resetMoney() {
     updateBalance();
     btnResetMoney.classList.add('hidden');
     btnAllin.classList.remove('hidden');
+    labelAllIn.textContent = "All-in";
 }
 
 btnAllin.addEventListener('click', allin);
 function allin() {
-    console.log(currentBet);
     balance += currentBet;
     currentBet = 0;
     currentBet = balance;
@@ -179,8 +185,10 @@ function startHand(){
     
     chipSection.classList.add('hidden');
     btnBet.disabled = true;
-    btnClear.classList.add('invisible');
-    btnAllin.classList.add('hidden');
+    btnClear.disabled = true;
+    btnAllin.disabled = true;
+    labelAllIn.classList.add('opacity-20');
+    labelClear.classList.add('opacity-20');
     
     handButtons.classList.remove('hidden');
     playerScore.classList.remove('invisible');

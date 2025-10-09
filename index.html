@@ -89,15 +89,15 @@
                     <section class="flex flex-row items-center gap-2">
                         <div id="currentBet" class="flex min-w-36 flex-col items-center rounded-md border-[1px] border-slate-800 bg-slate-800 lg:h-fit lg:min-w-28">
                             <div class="flex min-w-full items-center justify-between px-1 py-0.5 font-medium text-green-500 lg:py-0 lg:pt-1">
-                                <span class="pointer-events-none absolute translate-x-[5rem] text-center text-xs text-white lg:translate-x-14 lg:text-[0.6rem] lg:font-bold">All-in</span>
+                                <span id="labelAllIn" class="pointer-events-none absolute translate-x-[5rem] text-center text-xs text-white lg:translate-x-14 lg:text-[0.6rem] lg:font-bold">All-in</span>
                                 <p class="text-center">$<span id="balance">1000</span></p>
                                 <button id="btnResetMoney" title="Reset money" class="hidden size-6 transition active:bg-blue-600 lg:size-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="lg:size-5 lg:cursor-pointer lg:hover:text-white lg:transition-colors">
                                         <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0 1 12.548-3.364l1.903 1.903h-3.183a.75.75 0 1 0 0 1.5h4.992a.75.75 0 0 0 .75-.75V4.356a.75.75 0 0 0-1.5 0v3.18l-1.9-1.9A9 9 0 0 0 3.306 9.67a.75.75 0 1 0 1.45.388Zm15.408 3.352a.75.75 0 0 0-.919.53 7.5 7.5 0 0 1-12.548 3.364l-1.902-1.903h3.183a.75.75 0 0 0 0-1.5H2.984a.75.75 0 0 0-.75.75v4.992a.75.75 0 0 0 1.5 0v-3.18l1.9 1.9a9 9 0 0 0 15.059-4.035.75.75 0 0 0-.53-.918Z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
-                                <button id="btnAllin" title="All-in" class="size-6 transition active:bg-blue-600 lg:size-auto lg:transform  lg:cursor-pointer lg:transition-none lg:active:scale-75 lg:active:bg-transparent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="lg:size-5 lg:ml-1 lg:hover:text-white lg:transition-colors">
+                                <button id="btnAllin" title="All-in" class="size-6 select-auto transition active:bg-blue-600 disabled:select-none disabled:opacity-20 disabled:transition-none disabled:active:bg-transparent lg:size-auto lg:transform lg:cursor-pointer lg:transition-colors lg:hover:text-white lg:active:scale-75 lg:active:bg-transparent lg:disabled:transform-none lg:disabled:cursor-default lg:disabled:hover:text-inherit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="lg:size-5 lg:ml-1 ">
                                         <path fill-rule="evenodd" d="M10 1c3.866 0 7 1.79 7 4s-3.134 4-7 4-7-1.79-7-4 3.134-4 7-4Zm5.694 8.13c.464-.264.91-.583 1.306-.952V10c0 2.21-3.134 4-7 4s-7-1.79-7-4V8.178c.396.37.842.688 1.306.953C5.838 10.006 7.854 10.5 10 10.5s4.162-.494 5.694-1.37ZM3 13.179V15c0 2.21 3.134 4 7 4s7-1.79 7-4v-1.822c-.396.37-.842.688-1.306.953-1.532.875-3.548 1.369-5.694 1.369s-4.162-.494-5.694-1.37A7.009 7.009 0 0 1 3 13.179Z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
@@ -107,10 +107,10 @@
                                 <span class="text-center text-xs font-medium text-yellow-300">Current Bet</span>
                             </div>
                             <div class="flex w-full items-center justify-between rounded-b-md bg-slate-900 px-1 py-0.5 text-center font-medium lg:h-7 lg:py-0">
-                                <span class="pointer-events-none absolute translate-x-[5rem] text-center text-xs text-white lg:translate-x-[3.6rem] lg:text-[0.6rem] lg:font-bold">Clear</span>
+                                <span id="labelClear" class="pointer-events-none absolute translate-x-[5rem] text-center text-xs text-white lg:translate-x-[3.6rem] lg:text-[0.6rem] lg:font-bold">Clear</span>
                                 <span class="text-yellow-300">$<span id="totalBet" ></span></span>
-                                <button id="btnClear" title="Clear bet" class="size-6 transition active:bg-blue-600 lg:size-auto lg:transform lg:cursor-pointer lg:transition-none lg:active:scale-75 lg:active:bg-transparent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="lg:size-5 lg:transition-colors text-slate-700 lg:hover:text-white">
+                                <button id="btnClear" title="Clear bet" class="size-6 select-auto text-slate-700 transition active:bg-blue-600 disabled:select-none disabled:opacity-20 disabled:transition-none disabled:active:bg-transparent lg:size-auto lg:transform lg:cursor-pointer lg:transition-colors lg:hover:text-white lg:active:scale-75 lg:active:bg-transparent lg:disabled:transform-none lg:disabled:cursor-default lg:disabled:hover:text-slate-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="lg:size-5  ">
                                         <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clipRule="evenodd" />
                                     </svg>
                                 </button>
@@ -118,7 +118,7 @@
 
                         </div>
                         <div>
-                            <button id="btnBet" class="flex h-10 w-24 transform items-center justify-center rounded-md bg-green-800 text-white active:scale-90 active:text-blue-200 lg:hover:bg-green-700">
+                            <button id="btnBet" class="flex h-10 w-24 transform items-center justify-center rounded-md bg-green-800 text-white active:scale-90 active:text-blue-200 disabled:transform-none disabled:hover:bg-green-800 disabled:active:text-white lg:hover:bg-green-700">
                                 <span class="flex h-full w-full items-center justify-center border-r-2 text-center font-medium active:border-r-blue-200">Deal</span>
                                 <div class="h-6 w-6 aspect-square ml-[.15rem] mr-0.5">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/>
