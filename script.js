@@ -116,6 +116,7 @@ function startGame() {
     }
     
 }
+btnNextHand.addEventListener('click', startGame);
 
 const chipButtons = document.querySelectorAll('.chip');
 chipButtons.forEach(chip => {
@@ -453,6 +454,7 @@ function renderHand(hand, elementId) {
 
         container.appendChild(cardDiv);
 
+        // Adjust card scale for small screens when there are too many cards
         if (window.innerWidth > 768) continue; // Only for small screens
         if (elementId === 'playerShow') {
             // Keeps the player scale if dealer hand has more cards
@@ -482,7 +484,7 @@ function calculateHandValue(hand) {
         }
     }
 
-    // Adjust value if score is bigger than 21
+    // Adjust value if score is bigger than 21 when ace is present
     while (value > 21 && aces > 0) {
         value -= 10;
         aces--;
@@ -642,6 +644,7 @@ async function whoWin() {
 
     await sleep(500); 
 
+    // Player blackjack and dealer not
     if (playerTotal == 21 && playerHand.length == 2  && !(dealerTotal === 21 && dealerHand.length === 2)) {
         balance += Math.floor(currentBet * 2.5);
         updateBalance();
@@ -649,6 +652,7 @@ async function whoWin() {
         disableActions();
         return;
     }
+    // Dealer blackjack and player not
     if (dealerTotal == 21 && dealerHand.length == 2 && !(playerTotal === 21 && playerHand.length === 2)){
         
         showResult('lose', currentBet, "Dealer has Blackjack!");
@@ -660,28 +664,17 @@ async function whoWin() {
     if (dealerTotal > 21) {
         balance += currentBet * 2;
         updateBalance();
-        
-            showResult('win', currentBet * 2, "Dealer busts!");
-        
+        showResult('win', currentBet * 2, "Dealer busts!");
     } else if (playerTotal > dealerTotal) {
         balance += currentBet * 2;
         updateBalance();
-        
-            showResult('win', currentBet * 2, "You beat the Dealer!");
-        
+        showResult('win', currentBet * 2, "You beat the Dealer!");
     } else if (playerTotal < dealerTotal) {
-        console.warn("¡Pierdes!");
-        
-            showResult('lose', currentBet, "Dealer wins this hand!");
-        
+        showResult('lose', currentBet, "Dealer wins this hand!");
     } else {
-        console.info("Push!");
         balance += currentBet;
         updateBalance();
-        
-            showResult('tie', 0, "Push!");
-        
-        
+        showResult('tie', 0, "Push!");        
     }
     disableActions();
 }
@@ -747,7 +740,6 @@ function disableActions() {
     
 }
 
-btnNextHand.addEventListener('click', startGame);
 function enableActions() {
     toggleDisabled([btnHit, btnStand], false);
     btnHit.classList.remove('opacity-20');
