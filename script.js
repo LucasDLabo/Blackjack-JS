@@ -1,20 +1,45 @@
+// <<< DOM Elements >>>
+// First screen elements
+const startSection = document.getElementById('startSection');
 const controls = document.getElementById('controls');
-const handButtons = document.getElementById('handButtons');
+const btnStart = document.getElementById('btnStart');
 
+// Betting elements
+const betArea = document.getElementById('betArea');
+const playerScore = document.getElementById('playerScore');
+const dealerScore = document.getElementById('dealerScore');
+const h2text = document.getElementById('h2text');
+const chipSection = document.getElementById('chips');
+const btnAllin = document.getElementById('btnAllin');
+const labelAllIn = document.getElementById('labelAllIn');
+const btnResetMoney = document.getElementById('btnResetMoney');
+const btnClear = document.getElementById('btnClear');
+const labelClear = document.getElementById('labelClear');
+const balanceDisplay = document.getElementById('balance');
+const textBalance = document.getElementById('textBalance');
+const totalBet = document.getElementById('totalBet');
+const btnBet = document.getElementById('btnBet');
+
+// Action buttons elements
+const handButtons = document.getElementById('handButtons');
 const btnHit = document.getElementById('btnHit');
 const btnStand = document.getElementById('btnStand');
 const btnDouble = document.getElementById('btnDouble');
 const btnInsurance = document.getElementById('btnInsurance');
+const btnNextHand = document.getElementById('btnNextHand');
 
-const playerScore = document.getElementById('playerScore');
-const dealerScore = document.getElementById('dealerScore');
+// Card counting elements
+const runningCount = document.getElementById('runningCount');
+const totalCounter = document.getElementById('totalCounter');
+const givenCounter = document.getElementById('givenCounter');
+const remainingCounter = document.getElementById('remainingCounter');
 
-const betArea = document.getElementById('betArea');
-const btnResetMoney = document.getElementById('btnResetMoney');
-const btnAllin = document.getElementById('btnAllin');
-const labelAllIn = document.getElementById('labelAllIn');
-const labelClear = document.getElementById('labelClear');
-const textBalance = document.getElementById('textBalance');
+// Modal elements
+const resultModal = document.getElementById('resultModal');
+const resultTitle = document.getElementById('resultTitle');
+const resultMessage = document.getElementById('resultMessage');
+const resultAmount = document.getElementById('resultAmount');
+const closeResult = document.getElementById('closeResult');
 
 let playerHand = [];
 let dealerHand = [];
@@ -24,19 +49,10 @@ const suits = ['♠','♣','♦','♥'];
 const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
 let isDeckLow = false;
 
-const runningCount = document.getElementById('runningCount');
-const totalCounter = document.getElementById('totalCounter');
-const givenCounter = document.getElementById('givenCounter');
-const remainingCounter = document.getElementById('remainingCounter');
 
 let balance = 0;
 let currentBet = 0;
 let isInsuranceCardGenerated = false;
-const totalBet = document.getElementById('totalBet');
-
-const balanceDisplay = document.getElementById('balance');
-const betInput = document.getElementById('betInput');
-const placeBetBtn = document.getElementById('placeBet');
 
 const savedBalance = localStorage.getItem('balance');
 
@@ -48,17 +64,15 @@ if (savedBalance !== null) {
 
 createDeck(2);
 shuffleDeck();
-    
+
 totalCounter.textContent = `Total Cards: ${deck.length}`;
 totalCounter.setAttribute('title', `${deck.length} cards is equal to 2 Decks`);
 remainingCounter.innerHTML = `Remaining: <span class="text-green-400 font-bold">${deck.length}</span>`;
 
-const btnStart = document.getElementById('btnStart');
 btnStart.addEventListener('click', startGame);
 
 function startGame() {
     updateChipStates();
-    const startSection = document.getElementById('startSection');
     startSection.classList.add("hidden"); 
 
     renderHand([], 'playerShow');
@@ -169,7 +183,6 @@ function allin() {
     updateChipStates();
 }
 
-const btnClear = document.getElementById('btnClear');
 btnClear.addEventListener('click', clearBet);
 function clearBet() {
     balance += currentBet;
@@ -180,9 +193,6 @@ function clearBet() {
     updateChipStates();
 }
 
-const h2text = document.getElementById('h2text');
-const btnBet = document.getElementById('btnBet');
-const chipSection = document.getElementById('chips');
 let currentAnimationIndex = 0;
 const animations = ['flip-card', 'slide-in', 'zoom', 'slide-down'];
 btnBet.addEventListener('click', startHand);
@@ -714,12 +724,6 @@ async function whoWin() {
     disableActions();
 }
 
-const resultModal = document.getElementById('resultModal');
-const resultTitle = document.getElementById('resultTitle');
-const resultMessage = document.getElementById('resultMessage');
-const resultAmount = document.getElementById('resultAmount');
-const closeResult = document.getElementById('closeResult');
-
 function showResult(result, amount, comment) {
     resultModal.classList.remove('invisible');
 
@@ -767,7 +771,6 @@ closeResult.addEventListener('click', () => {
 });
 
 
-const btnNextHand = document.getElementById('btnNextHand');
 function disableActions() {
     btnHit.disabled = true;
     btnStand.disabled = true;
