@@ -40,28 +40,29 @@ const resultTitle = document.getElementById('resultTitle');
 const resultMessage = document.getElementById('resultMessage');
 const resultAmount = document.getElementById('resultAmount');
 const closeResult = document.getElementById('closeResult');
-
-let playerHand = [];
-let dealerHand = [];
-
+// ============================================================
+// <<< Game Variables >>>
+// Deck and hands
 let deck = [];
 const suits = ['♠','♣','♦','♥'];
 const values = ['A','K','Q','J','10','9','8','7','6','5','4','3','2'];
+let playerHand = [];
+let dealerHand = [];
 let isDeckLow = false;
-
-
-let balance = 0;
-let currentBet = 0;
 let isInsuranceCardGenerated = false;
 
-const savedBalance = localStorage.getItem('balance');
+// Money
+let balance = 0;
+let currentBet = 0;
 
+// localStorage balance saving and loading
+const savedBalance = localStorage.getItem('balance');
 if (savedBalance !== null) {
     balance = parseInt(savedBalance);
 } else {
     balance = 1000;
 }
-
+// ============================================================
 createDeck(2);
 shuffleDeck();
 
