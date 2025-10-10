@@ -80,21 +80,17 @@ function startGame() {
     enableActions();
     
     btnStart.disabled = true;
-    dealerScore.classList.add('invisible');
-    playerScore.classList.add('invisible');
-    btnNextHand.classList.add('hidden');
-    handButtons.classList.add('hidden');
+    toggleElementVisibility([dealerScore, playerScore], true, 'invisible');
+    toggleElementVisibility([btnNextHand, handButtons], true, 'hidden');
+    toggleElementVisibility([betArea, chipSection, runningCount], false, 'hidden');
     runningCount.classList.add('flex');
 
-    betArea.classList.remove('hidden');
-    chipSection.classList.remove('hidden');
     btnBet.disabled = true;
     btnClear.disabled = false;
     btnAllin.disabled = false;
     labelAllIn.classList.remove('opacity-20');
     labelClear.classList.remove('opacity-20');
     textBalance.classList.remove('opacity-20');
-    runningCount.classList.remove('hidden');
     
     // Changes All-in button to reset money if balance is 0
     if (balance <= 0) {
@@ -218,22 +214,18 @@ function startHand(){
     h2text.textContent = "Choose your action";
 
     btnInsurance.disabled = true;
-    
-    chipSection.classList.add('hidden');
     btnBet.disabled = true;
     btnClear.disabled = true;
     btnAllin.disabled = true;
+
+    chipSection.classList.add('hidden');
+    handButtons.classList.remove('hidden');
+    handButtons.classList.add('flex');
+    toggleElementVisibility([playerScore, dealerScore, btnHit, btnStand], false, 'invisible');
+
     labelAllIn.classList.add('opacity-20');
     labelClear.classList.add('opacity-20');
     textBalance.classList.add('opacity-20');
-    
-    handButtons.classList.remove('hidden');
-    playerScore.classList.remove('invisible');
-    dealerScore.classList.remove('invisible');
-    btnHit.classList.remove('invisible');
-    btnStand.classList.remove('invisible');
-
-    handButtons.classList.add('flex');
 
     updateBalance();
     updateTextBalance();
@@ -322,7 +314,6 @@ async function stand(playerHasBlackjack) {
         }
         // is soft17? hit
         else if (total === 17 && isSoft17(dealerHand)) {
-            console.info('SOFT17!');
             dealerHand.push(giveCard());
             updateDealerHand()
             await sleep(1000);
@@ -446,8 +437,6 @@ function generateCard() {
     }
     playerHand.push(giveCard());
     renderHand(playerHand, 'playerShow');
-    
-    console.log(`Hand Points: ${calculateHandValue(playerHand)}`);
 }
 
 function renderHand(hand, elementId) {
@@ -797,4 +786,17 @@ function enableActions() {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function toggleElementVisibility(elements, hide = true, type = 'hidden') {
+    // True to hide, false to show
+    if (!Array.isArray(elements)) elements = [elements];
+    
+    elements.forEach(element => {
+        if (hide) {
+            element.classList.add(type);
+        } else {
+            element.classList.remove(type);
+        }
+    });
 }
