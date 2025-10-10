@@ -201,11 +201,6 @@ function startHand(){
         btnDouble.disabled = false;
     }
 
-    // Is the dealer showing an Ace?
-    if (dealerHand[0].value === 'A' && balance >= currentBet / 2) {
-        btnInsurance.disabled = false;
-    }
-
     //Change animations
     currentAnimationIndex++;
     if (currentAnimationIndex >= animations.length) {
@@ -227,12 +222,17 @@ function startHand(){
 
     updateBalance();
     updateTextBalance();
-    
+
     dealerHand = [];
     playerHand = [giveCard(), giveCard()];
     dealerHand = [giveCard()];
     renderPlayerInitialHand() 
     renderDealerInitialHand() 
+
+    // Is the dealer showing an Ace?
+    if (dealerHand[0].value === 'A' && balance >= currentBet / 2) {
+        btnInsurance.disabled = false;
+    }
 
     // Check if player first hand is a blackjack
     if (calculateHandValue(playerHand) === 21 && playerHand.length === 2) {
@@ -248,7 +248,6 @@ function startHand(){
 }
 
 btnHit.addEventListener('click', hit);
-
 function hit() {
     toggleDisabled([btnDouble, btnInsurance], true);
     playerHand.push(giveCard());
@@ -267,7 +266,6 @@ function hit() {
 btnStand.addEventListener('click', stand);
 async function stand(playerHasBlackjack) {
     // Dealer plays...
-
     toggleDisabled([btnHit, btnStand, btnDouble, btnInsurance], true);
 
     // Player has blackjack?
