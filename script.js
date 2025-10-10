@@ -412,7 +412,6 @@ function insurance() {
 
 function generateCard() {
     if (deck.length === 0) {
-        console.log("No cards left");
         return;
     }
     playerHand.push(giveCard());
@@ -566,9 +565,7 @@ function adjustCardScale(containerId) {
 
     const maxWidth = container.offsetWidth;
     const totalWidth = cards.length * 85; // Estimating each card width + margin
-    console.log(`Total card width: ${totalWidth}px, Container width: ${maxWidth}px`);
     const scale = totalWidth > maxWidth ? maxWidth / totalWidth : 1;
-    console.log(`Scale factor: ${scale}`);
 
     if (totalWidth > maxWidth) {
         cards.forEach(card => {
@@ -661,14 +658,12 @@ async function whoWin() {
     }
 
     if (dealerTotal > 21) {
-        console.log("El dealer se pasó. ¡Ganas!");
         balance += currentBet * 2;
         updateBalance();
         
             showResult('win', currentBet * 2, "Dealer busts!");
         
     } else if (playerTotal > dealerTotal) {
-        console.log("¡Le ganas al Dealer!");
         balance += currentBet * 2;
         updateBalance();
         
