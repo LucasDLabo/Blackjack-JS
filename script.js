@@ -75,22 +75,22 @@ function startGame() {
 
     renderHand([], 'playerShow');
     renderHand([], 'dealerShow');
-    currentBet = 0;
-    h2text.textContent = "Place your bet";
     enableActions();
     
-    btnStart.disabled = true;
     toggleElementVisibility([dealerScore, playerScore], true, 'invisible');
     toggleElementVisibility([btnNextHand, handButtons], true, 'hidden');
     toggleElementVisibility([betArea, chipSection, runningCount], false, 'hidden');
-    runningCount.classList.add('flex');
 
-    btnBet.disabled = true;
-    btnClear.disabled = false;
-    btnAllin.disabled = false;
+    toggleDisabled([btnStart, btnBet], true);
+    toggleDisabled([btnClear, btnAllin], false);
+
+    runningCount.classList.add('flex');
     labelAllIn.classList.remove('opacity-20');
     labelClear.classList.remove('opacity-20');
     textBalance.classList.remove('opacity-20');
+
+    currentBet = 0;
+    h2text.textContent = "Place your bet";
     
     // Changes All-in button to reset money if balance is 0
     if (balance <= 0) {
@@ -213,15 +213,13 @@ function startHand(){
 
     h2text.textContent = "Choose your action";
 
-    btnInsurance.disabled = true;
-    btnBet.disabled = true;
-    btnClear.disabled = true;
-    btnAllin.disabled = true;
+    toggleDisabled([btnInsurance, btnBet, btnClear, btnAllin], true);
+    toggleElementVisibility([playerScore, dealerScore, btnHit, btnStand], false, 'invisible');
+
 
     chipSection.classList.add('hidden');
     handButtons.classList.remove('hidden');
     handButtons.classList.add('flex');
-    toggleElementVisibility([playerScore, dealerScore, btnHit, btnStand], false, 'invisible');
 
     labelAllIn.classList.add('opacity-20');
     labelClear.classList.add('opacity-20');
@@ -244,10 +242,7 @@ function startHand(){
     if (calculateHandValue(playerHand) === 21 && playerHand.length === 2) {
         const playerHasBlackjack = true;
 
-        btnHit.disabled = true;
-        btnStand.disabled = true;
-        btnDouble.disabled = true;
-        btnInsurance.disabled = true;
+        toggleDisabled([btnHit, btnStand, btnDouble, btnInsurance], true);
 
         setTimeout(() => {
             stand(playerHasBlackjack);
@@ -259,14 +254,12 @@ function startHand(){
 btnHit.addEventListener('click', hit);
 
 function hit() {
-    btnDouble.disabled = true;
-    btnInsurance.disabled = true;
+    toggleDisabled([btnDouble, btnInsurance], true);
     playerHand.push(giveCard());
     updatePlayerHand();
 
     if (calculateHandValue(playerHand) > 21) {
-        btnHit.disabled = true;
-        btnStand.disabled = true;
+        toggleDisabled([btnHit, btnStand], true);
         setTimeout( () => {
             showResult('lose', currentBet, "You went over 21!");
             disableActions();
@@ -279,12 +272,9 @@ btnStand.addEventListener('click', stand);
 async function stand(playerHasBlackjack) {
     // Dealer plays...
 
-    btnHit.disabled = true;
-    btnStand.disabled = true;
-    btnDouble.disabled = true;
-    btnInsurance.disabled = true;
+    toggleDisabled([btnHit, btnStand, btnDouble, btnInsurance], true);
 
-    // player has blackjack?
+    // Player has blackjack?
     if (playerHasBlackjack === true) {
         dealerHand.push(giveCard());
         updateDealerHand() 
@@ -362,9 +352,7 @@ function double() {
     playerHand.push(giveCard());
     updatePlayerHand();
 
-    btnHit.disabled = true;
-    btnStand.disabled = true;
-    btnDouble.disabled = true;
+    toggleDisabled([btnHit, btnStand, btnDouble], true);
 
     // Automatically stand
     if (calculateHandValue(playerHand) > 21) {
@@ -385,9 +373,7 @@ btnInsurance.addEventListener('click', insurance);
 function insurance() {
     const maxInsurance = Math.ceil(currentBet / 2);
 
-    btnHit.disabled = true;
-    btnStand.disabled = true;
-    btnDouble.disabled = true;
+    toggleDisabled([btnHit, btnStand, btnDouble], true);
 
     if (balance < maxInsurance) {
         btnInsurance.disabled = true;
@@ -418,9 +404,8 @@ function insurance() {
         insuranceBet = 0;
         setTimeout(() => {
             showResult('lose', maxInsurance, "Dealer doesn't have Blackjack.");
-            btnHit.disabled = false;
-            btnStand.disabled = false;
-            
+            toggleDisabled([btnHit, btnStand], false);
+
             balance < currentBet ? btnDouble.disabled = true : btnDouble.disabled = false;
 
             isInsuranceCardGenerated = true;
@@ -759,10 +744,7 @@ closeResult.addEventListener('click', () => {
 
 
 function disableActions() {
-    btnHit.disabled = true;
-    btnStand.disabled = true;
-    btnDouble.disabled = true;
-    btnInsurance.disabled = true;
+    toggleDisabled([btnHit, btnStand, btnDouble, btnInsurance], true);
     
     setTimeout(() => {
         h2text.textContent = "Play another hand";
@@ -777,8 +759,7 @@ function disableActions() {
 
 btnNextHand.addEventListener('click', startGame);
 function enableActions() {
-    btnHit.disabled = false;
-    btnStand.disabled = false;
+    toggleDisabled([btnHit, btnStand], false);
     btnHit.classList.remove('opacity-20');
     btnStand.classList.remove('opacity-20');
     handButtons.classList.remove('hidden');
@@ -798,5 +779,13 @@ function toggleElementVisibility(elements, hide = true, type = 'hidden') {
         } else {
             element.classList.remove(type);
         }
+    });
+}
+
+function toggleDisabled(elements, state) { 
+    // True to disable, false to enable
+    if (!Array.isArray(elements)) elements = [elements];
+    elements.forEach(element => {
+        element.disabled = state;
     });
 }
