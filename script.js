@@ -190,10 +190,21 @@ let currentAnimationIndex = 0;
 const animations = ['flip-card', 'slide-in', 'zoom', 'slide-down'];
 btnBet.addEventListener('click', startHand);
 function startHand(){
+    if (currentBet == 0) return;
 
     localStorage.setItem('balance', balance);
 
-    btnDouble.disabled = false;
+    // Has the player enough balance to double?
+    if (balance < currentBet) {
+        btnDouble.disabled = true;
+    } else {
+        btnDouble.disabled = false;
+    }
+
+    // Is the dealer showing an Ace?
+    if (dealerHand[0].value === 'A' && balance >= currentBet / 2) {
+        btnInsurance.disabled = false;
+    }
 
     //Change animations
     currentAnimationIndex++;
@@ -201,43 +212,29 @@ function startHand(){
         currentAnimationIndex = 0;
     }
 
-    if (currentBet == 0) {
-        // alert("Enter bet amount");
-        return;
-    }
-    
-    if (balance < currentBet) {
-        btnDouble.disabled = true;
-    }
-
     h2text.textContent = "Choose your action";
 
     toggleDisabled([btnInsurance, btnBet, btnClear, btnAllin], true);
     toggleElementVisibility([playerScore, dealerScore, btnHit, btnStand], false, 'invisible');
 
-
     chipSection.classList.add('hidden');
-    handButtons.classList.remove('hidden');
-    handButtons.classList.add('flex');
-
     labelAllIn.classList.add('opacity-20');
     labelClear.classList.add('opacity-20');
     textBalance.classList.add('opacity-20');
 
+    handButtons.classList.remove('hidden');
+    handButtons.classList.add('flex');
+
     updateBalance();
     updateTextBalance();
+    
     dealerHand = [];
-
     playerHand = [giveCard(), giveCard()];
     dealerHand = [giveCard()];
-    
     renderPlayerInitialHand() 
     renderDealerInitialHand() 
 
-    if (dealerHand[0].value === 'A' && balance >= currentBet / 2) {
-        btnInsurance.disabled = false;
-    }
-
+    // Check if player first hand is a blackjack
     if (calculateHandValue(playerHand) === 21 && playerHand.length === 2) {
         const playerHasBlackjack = true;
 
