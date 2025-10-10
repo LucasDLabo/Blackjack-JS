@@ -168,10 +168,8 @@ function resetMoney() {
 
 btnAllin.addEventListener('click', allin);
 function allin() {
-    balance += currentBet;
-    currentBet = 0;
-    currentBet = balance;
-    balance -=  currentBet;
+    currentBet = balance + currentBet;
+    balance = 0;
     updateBalance();
     updateTextBalance();
     btnBet.disabled = false;
