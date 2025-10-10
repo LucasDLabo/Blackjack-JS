@@ -60,7 +60,7 @@ const savedBalance = localStorage.getItem('balance');
 if (savedBalance !== null) {
     balance = parseInt(savedBalance);
 } else {
-    balance = 1000;
+    balance = 10000;
 }
 // ============================================================
 createDeck(2);
@@ -157,7 +157,7 @@ function updateTextBalance() {
 
 btnResetMoney.addEventListener('click', resetMoney);
 function resetMoney() {
-    balance = 1000;
+    balance = 10000;
     updateBalance();
     updateTextBalance();
     updateChipStates();
