@@ -278,6 +278,7 @@ async function stand(playerHasBlackjack) {
         return
     }
 
+    // Checks if insurance card was generated and shows it
     if (isInsuranceCardGenerated == true) {
         updateDealerHand();
         isInsuranceCardGenerated = false;
@@ -286,7 +287,7 @@ async function stand(playerHasBlackjack) {
         await sleep(1000);
     }
 
-    //Soft 17
+    // Dealer hit logic
     while (true) {
         const total = calculateHandValue(dealerHand);
 
