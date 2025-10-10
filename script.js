@@ -1,6 +1,5 @@
 // <<< DOM Elements >>>
 // First screen elements
-const startSection = document.getElementById('startSection');
 const controls = document.getElementById('controls');
 const btnStart = document.getElementById('btnStart');
 
@@ -71,10 +70,8 @@ totalCounter.setAttribute('title', `${deck.length} cards is equal to 2 Decks`);
 remainingCounter.innerHTML = `Remaining: <span class="text-green-400 font-bold">${deck.length}</span>`;
 
 btnStart.addEventListener('click', startGame);
-
 function startGame() {
     updateChipStates();
-    startSection.classList.add("hidden"); 
 
     renderHand([], 'playerShow');
     renderHand([], 'dealerShow');
