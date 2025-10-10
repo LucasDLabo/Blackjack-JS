@@ -1,5 +1,6 @@
 // <<< DOM Elements >>>
 // First screen elements
+const startSection = document.getElementById('startSection');
 const controls = document.getElementById('controls');
 const btnStart = document.getElementById('btnStart');
 
@@ -78,7 +79,7 @@ function startGame() {
     enableActions();
     
     toggleElementVisibility([dealerScore, playerScore], true, 'invisible');
-    toggleElementVisibility([btnNextHand, handButtons], true, 'hidden');
+    toggleElementVisibility([startSection, btnNextHand, handButtons], true, 'hidden');
     toggleElementVisibility([betArea, chipSection, runningCount], false, 'hidden');
 
     toggleDisabled([btnStart, btnBet], true);
