@@ -24,8 +24,11 @@ This project was originally intended to strengthen my understanding of core Java
   </a>
 </p>
 
+---
+
 ## 🧠 Lessons Learned
-1. *UI management using only DOM manipulation*
+Interesting concepts worth showing 
+1. ***UI management using only DOM manipulation***
     ```
     const chipButtons = document.querySelectorAll('.chip');
     chipButtons.forEach(chip => {
@@ -42,7 +45,7 @@ This project was originally intended to strengthen my understanding of core Java
     });
     ```
     > Handles chip clicks to place bets and update balance
-2. *Use of async functions to give the player time to see what's happening*
+2. ***Use of async functions to give the player time to see what's happening***
     ```
     btnStand.addEventListener('click', stand);
     async function stand(playerHasBlackjack) {
@@ -74,7 +77,7 @@ This project was originally intended to strengthen my understanding of core Java
     }
     ```
     > Dealer logic using await to simulate natural pauses between moves
-3. *How to combine both design and resposiveness to provide a pleasant experience*
+3. ***How to combine both design and resposiveness to provide a pleasant experience***
     ```
     // Adjust card scale for small screens when there are too many cards
     if (window.innerWidth > 768) continue;
@@ -90,7 +93,7 @@ This project was originally intended to strengthen my understanding of core Java
     cardDiv.style.transformOrigin = 'center';
     ```
     > Mobile-only adjustment to avoid card clipping and overflow
-4. *A general refresh of fundamental web programming concepts*
+4. ***A general refresh of fundamental web programming concepts***
     ```
     function createDeck(numberOfDecks = 2) {
         deck = [];
@@ -111,6 +114,19 @@ This project was originally intended to strengthen my understanding of core Java
     }
     ```
     > Function to create and shuffle 2 decks usign Fisher–Yates algorithm
+
+---
+
+## 🎮 How to play Blackjack
+
+- The goal is to reach **21 points** without going over, and to have **more points than the dealer**.
+- Number cards are worth their face value, face cards are worth **10**, and the Ace counts as **1 or 11**.
+- The **dealer** must draw cards until reaching **17 points**.
+- This game uses **2 decks**, so keep in mind which cards have already been drawn.
+
+---
+
+🤗 Thanks for reading! 
 
 
 
