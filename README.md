@@ -9,7 +9,6 @@ This project was originally intended to strengthen my understanding of core Java
 - 🎮 **Fully playable Blackjack logic** — Including betting, hitting, standing, doubling down, and insurance
 - 🎇 **Responsive UI and visual feedback** — Subtle animations, transitions, and interaction feedback for both desktop and mobile devices.
 - 🔮 **QoL features** — Such as card counting, player and dealer hand value, unaffordable casino chips indication, All-in and Clear bet buttons.
-
 ## 🔱 The triad
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" width="80" alt="HTML" />
@@ -18,7 +17,12 @@ This project was originally intended to strengthen my understanding of core Java
 </p>
 
 ## 🚀 Live Demo
-🔗 [https://lucasdlabo.github.io/Blackjack-JS/](https://lucasdlabo.github.io/Blackjack-JS/)
+*Click the GIF below to play!*
+<p align="center">
+  <a href="https://lucasdlabo.github.io/Blackjack-JS/">
+    <img src="/readme/preview.gif" alt="Blackjack Demo" width="1000">
+  </a>
+</p>
 
 ## 🧠 Lessons Learned
 1. *UI management using only DOM manipulation*
