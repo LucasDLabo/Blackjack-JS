@@ -1,6 +1,5 @@
 # *🃏 BlackjackJS*
 
-
 **BlackjackJS** is a browser-based Blackjack game developed entirely in **Vanilla JavaScript**, born as a learning project and refined into a fully playable and polished product.
 
 This project was originally intended to strengthen my understanding of core JavaScript concepts — DOM manipulation, event handling, and state management — but it evolved into a complete, responsive, and functional browser game.
@@ -9,7 +8,8 @@ This project was originally intended to strengthen my understanding of core Java
 - 🎮 **Fully playable Blackjack logic** — Including betting, hitting, standing, doubling down, and insurance
 - 🎇 **Responsive UI and visual feedback** — Subtle animations, transitions, and interaction feedback for both desktop and mobile devices.
 - 🔮 **QoL features** — Such as card counting, player and dealer hand value, unaffordable casino chips indication, All-in and Clear bet buttons.
-## 🔱 The triad
+
+## 🔱 The Triad
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" width="80" alt="HTML" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" width="80" alt="Tailwind CSS"/>
@@ -27,7 +27,7 @@ This project was originally intended to strengthen my understanding of core Java
 ---
 
 ## 🧠 Lessons Learned
-Interesting concepts worth showing 
+Interesting concepts worth showcasing 
 1. ***UI management using only DOM manipulation***
     ```
     const chipButtons = document.querySelectorAll('.chip');
@@ -77,7 +77,7 @@ Interesting concepts worth showing
     }
     ```
     > Dealer logic using await to simulate natural pauses between moves
-3. ***How to combine both design and resposiveness to provide a pleasant experience***
+3. ***How to combine both design and responsiveness to provide a pleasant experience***
     ```
     // Adjust card scale for small screens when there are too many cards
     if (window.innerWidth > 768) continue;
@@ -113,7 +113,7 @@ Interesting concepts worth showing
         }
     }
     ```
-    > Function to create and shuffle 2 decks usign Fisher–Yates algorithm
+    > Function to create and shuffle 2 decks using Fisher–Yates algorithm
 
 ---
 
@@ -127,7 +127,3 @@ Interesting concepts worth showing
 ---
 
 🤗 Thanks for reading! 
-
-
-
-
