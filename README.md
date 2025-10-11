@@ -19,8 +19,8 @@ This project was originally intended to strengthen my understanding of core Java
 ## 🚀 Live Demo
 *Click the GIF below to play!*
 <p align="center">
-  <a href="https://lucasdlabo.github.io/Blackjack-JS/">
-    <img src="/readme/preview.gif" alt="Blackjack Demo" width="1000">
+  <a href="https://lucasdlabo.github.io/Blackjack-JS/" target="_blank">
+    <img src="/readme/preview.gif" alt="Blackjack Demo" width="1000" style="border: 5px solid darkslategray; border-radius: 10px; box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.75);">
   </a>
 </p>
 
